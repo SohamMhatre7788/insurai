@@ -1,0 +1,123 @@
+.buy-policy-container {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.policies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.policy-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.policy-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.policy-description {
+    color: var(--neutral-600);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+}
+
+.policy-details {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background: var(--neutral-50);
+    border-radius: var(--radius-md);
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-sm);
+}
+
+.detail-label {
+    color: var(--neutral-600);
+    font-weight: 500;
+}
+
+.detail-value {
+    color: var(--neutral-800);
+    font-weight: 600;
+}
+
+.badge-low {
+    background: var(--success-light);
+    color: var(--success-dark);
+}
+
+.badge-medium {
+    background: var(--warning-light);
+    color: var(--warning-dark);
+}
+
+.badge-high {
+    background: var(--danger-light);
+    color: var(--danger-dark);
+}
+
+.purchase-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.selected-policy-summary {
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+.premium-summary {
+    padding: var(--spacing-lg);
+    background: var(--primary-50);
+    border-radius: var(--radius-md);
+    text-align: center;
+    margin: var(--spacing-lg) 0;
+}
+
+.premium-summary h4 {
+    color: var(--primary-700);
+    font-size: var(--font-size-xl);
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: space-between;
+}
+
+.success-container {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-card {
+    text-align: center;
+    max-width: 500px;
+}
+
+.success-icon {
+    font-size: 5rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.success-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    margin-top: var(--spacing-xl);
+}
