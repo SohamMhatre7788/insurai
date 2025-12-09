@@ -1,0 +1,63 @@
+.manage-claims-container {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+}
+
+.filter-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+    justify-content: center;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.claim-details {
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-lg);
+    background: var(--neutral-50);
+    border-radius: var(--radius-md);
+}
+
+.claim-details p {
+    margin-bottom: var(--spacing-sm);
+}
+
+.modal-actions {
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-lg);
+    border-top: 2px solid var(--neutral-200);
+    border-bottom: 2px solid var(--neutral-200);
+}
+
+.badge-pending {
+    background: var(--warning-light);
+    color: var(--warning-dark);
+}
+
+.badge-approved {
+    background: var(--success-light);
+    color: var(--success-dark);
+}
+
+.badge-rejected {
+    background: var(--danger-light);
+    color: var(--danger-dark);
+}
