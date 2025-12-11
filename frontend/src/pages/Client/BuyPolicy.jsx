@@ -43,7 +43,7 @@ const BuyPolicy = () => {
 
     const calculatePremium = () => {
         if (!selectedPolicy || !formData.policyPeriodYears) return 0;
-        return selectedPolicy.premiumPerYear * formData.policyPeriodYears;
+        return selectedPolicy.premiumPerYear * formData.policyPeriodYears * formData.numberOfEmployees;
     };
 
     const handleSubmit = async (e) => {
@@ -103,11 +103,11 @@ const BuyPolicy = () => {
                             <div className="policy-details">
                                 <div className="detail-item">
                                     <span className="detail-label">Coverage:</span>
-                                    <span className="detail-value">${policy.coverageAmount.toLocaleString()}</span>
+                                    <span className="detail-value">{policy.coverageAmount.toLocaleString()} Rupees</span>
                                 </div>
                                 <div className="detail-item">
                                     <span className="detail-label">Premium/Year:</span>
-                                    <span className="detail-value">${policy.premiumPerYear.toLocaleString()}</span>
+                                    <span className="detail-value">{policy.premiumPerYear.toLocaleString()} Rupees</span>
                                 </div>
                                 <div className="detail-item">
                                     <span className="detail-label">Period:</span>
@@ -124,7 +124,7 @@ const BuyPolicy = () => {
                 <div className="purchase-form-container fade-in">
                     <div className="selected-policy-summary card">
                         <h3>Selected Policy: {selectedPolicy.name}</h3>
-                        <p>Coverage: ${selectedPolicy.coverageAmount.toLocaleString()}</p>
+                        <p>Individual Coverage: {selectedPolicy.coverageAmount.toLocaleString()} Rupees</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="purchase-form card">
@@ -168,9 +168,16 @@ const BuyPolicy = () => {
                                 required
                             />
                         </div>
-
+                        
+                        <div>
+                            <label className="input-label">Terms & condition:<br/></label>
+                            <div>{policies.map((policy) => (
+                                <p className="policy-description">{policy.description}</p>
+                            ))}
+                            </div>
+                        </div>
                         <div className="premium-summary">
-                            <h4>Total Premium: ${calculatePremium().toLocaleString()}</h4>
+                            <h4>Total Premium(Per Year): {calculatePremium().toLocaleString()} Rupees</h4>
                         </div>
 
                         <div className="form-actions">
