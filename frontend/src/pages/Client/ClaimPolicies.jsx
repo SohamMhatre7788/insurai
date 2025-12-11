@@ -113,7 +113,7 @@ const ClaimPolicies = () => {
 
                     {selectedPolicy && (
                         <div className="policy-info">
-                            <p><strong>Max Coverage:</strong> ${selectedPolicy.coverageAmount.toLocaleString()}</p>
+                            <p><strong>Max Coverage:</strong> {selectedPolicy.coverageAmount.toLocaleString()} Rupees</p>
                         </div>
                     )}
 
@@ -154,7 +154,7 @@ const ClaimPolicies = () => {
                             multiple
                             accept=".pdf,.jpg,.jpeg,.png"
                         />
-                        <small className="input-hint">Upload supporting documents (PDF, JPG, PNG)</small>
+                        <small className="input-hint">Upload supporting documents (PDF)</small>
                     </div>
 
                     <button type="submit" className="btn btn-primary" disabled={submitting}>
