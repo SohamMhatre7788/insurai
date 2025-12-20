@@ -102,8 +102,8 @@ const ManageClaims = () => {
                             <tr key={claim.id}>
                                 <td>{claim.companyName}</td>
                                 <td>{claim.policyName}</td>
-                                <td>${claim.claimAmountRequested.toLocaleString()}</td>
-                                <td>${claim.maxCoverageForPolicy.toLocaleString()}</td>
+                                <td>{claim.claimAmountRequested.toLocaleString()} Rupees</td>
+                                <td>{claim.maxCoverageForPolicy.toLocaleString()} Rupees</td>
                                 <td>
                                     <span className={`badge badge-${claim.status.toLowerCase()}`}>
                                         {claim.status}
@@ -132,8 +132,8 @@ const ManageClaims = () => {
                         <div className="claim-details">
                             <p><strong>Company:</strong> {selectedClaim.companyName}</p>
                             <p><strong>Policy:</strong> {selectedClaim.policyName}</p>
-                            <p><strong>Claim Amount:</strong> ${selectedClaim.claimAmountRequested.toLocaleString()}</p>
-                            <p><strong>Max Coverage:</strong> ${selectedClaim.maxCoverageForPolicy.toLocaleString()}</p>
+                            <p><strong>Claim Amount:</strong> {selectedClaim.claimAmountRequested.toLocaleString()} Rupees</p>
+                            <p><strong>Max Coverage:</strong> {selectedClaim.maxCoverageForPolicy.toLocaleString()} Rupees</p>
                             <p><strong>Description:</strong> {selectedClaim.description}</p>
                             <p><strong>Status:</strong> {selectedClaim.status}</p>
                             {selectedClaim.supportingDocumentUrls?.length > 0 && (
