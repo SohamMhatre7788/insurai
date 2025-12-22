@@ -67,8 +67,8 @@ const MyPolicies = () => {
                                 <tr key={policy.id}>
                                     <td>{policy.policyName}</td>
                                     <td>{policy.companyName}</td>
-                                    <td>${policy.premiumAmount.toLocaleString()}</td>
-                                    <td>${policy.coverageAmount.toLocaleString()}</td>
+                                    <td>{policy.premiumAmount.toLocaleString()} Rupees</td>
+                                    <td>{policy.coverageAmount.toLocaleString()} Rupees</td>
                                     <td>{new Date(policy.startDate).toLocaleDateString()}</td>
                                     <td>{new Date(policy.endDate).toLocaleDateString()}</td>
                                     <td>

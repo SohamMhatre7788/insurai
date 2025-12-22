@@ -96,7 +96,7 @@ const Profile = () => {
                 <div className="auth-card card fade-in">
                     <h2>Update Profile</h2>
                     <form onSubmit={handleProfileSubmit} className="auth-form">
-                        {profileError && <div className="error-message">{profileError}</div>}
+                        {/* {profileError && <div className="error-message">{profileError}</div>} */}
                         {profileSuccess && <div className="success-message">{profileSuccess}</div>}
 
                         <div className="input-row">

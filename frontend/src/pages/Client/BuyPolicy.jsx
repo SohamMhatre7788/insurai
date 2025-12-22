@@ -43,7 +43,7 @@ const BuyPolicy = () => {
 
     const calculatePremium = () => {
         if (!selectedPolicy || !formData.policyPeriodYears) return 0;
-        return selectedPolicy.premiumPerYear * formData.policyPeriodYears * formData.numberOfEmployees;
+        return selectedPolicy.premiumPerYear * formData.numberOfEmployees;
     };
 
     const handleSubmit = async (e) => {
@@ -177,7 +177,7 @@ const BuyPolicy = () => {
                             </div>
                         </div>
                         <div className="premium-summary">
-                            <h4>Total Premium(Per Year): {calculatePremium().toLocaleString()} Rupees</h4>
+                            <h4>Total Premium(Per Month): {calculatePremium().toLocaleString()} Rupees</h4>
                         </div>
 
                         <div className="form-actions">

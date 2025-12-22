@@ -1,0 +1,31 @@
+.footer {
+  background-color: #66717c;
+  color: #ffffff;
+  padding: 40px 20px;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: auto;
+  text-align: center;
+}
+
+.footer-about a{
+  color: #ffffff;
+}
+
+
+/*
+.footer-about p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #d1d5db;
+  max-width: 600px;
+  margin: auto;
+}
+
+.footer-bottom {
+  margin-top: 30px;
+  font-size: 12px;
+  color: #9ca3af;
+} */

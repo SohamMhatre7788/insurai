@@ -67,8 +67,8 @@ const ManagePolicies = () => {
                         {policies.map((policy) => (
                             <tr key={policy.id}>
                                 <td>{policy.name}</td>
-                                <td>${policy.premiumPerYear.toLocaleString()}</td>
-                                <td>${policy.coverageAmount.toLocaleString()}</td>
+                                <td>{policy.premiumPerYear.toLocaleString()} Rupees</td>
+                                <td>{policy.coverageAmount.toLocaleString()} Rupees</td>
                                 <td>
                                     <span className={`badge badge-${policy.riskLevel.toLowerCase()}`}>
                                         {policy.riskLevel}
