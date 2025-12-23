@@ -74,21 +74,25 @@ export const claimService = {
 };
 
 export const userService = {
-    getProfile: async () => {
-        const response = await api.get('/client/me');
+    getProfile: async (userId) => {
+        const response = await api.get(`/client/me?userId=${userId}`);
         return response.data;
     },
 
-    updateProfile: async (data) => {
-        const response = await api.put('/client/me', data);
+    updateProfile: async (userId, data) => {
+        const response = await api.put(`/client/me?userId=${userId}`, data);
         return response.data;
     },
 
-    changePassword: async (data) => {
-        const response = await api.put('/client/me/password', data);
+    changePassword: async (userId, data) => {
+        const response = await api.put(
+            `/client/me/password?userId=${userId}`,
+            data
+        );
         return response.data;
     },
 };
+
 
 export const adminService = {
     // Policy Management

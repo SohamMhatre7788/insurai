@@ -39,10 +39,11 @@ public class SecurityConfig {
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/policies").permitAll()
                         .requestMatchers("/policies/{id}").permitAll()
-                        .requestMatchers("/client/**").hasRole("CLIENT")
+                        .requestMatchers("/client/**").permitAll()
                         .requestMatchers("/client-policies/**").hasRole("CLIENT")
                         .requestMatchers("/claims/**").hasAnyRole("CLIENT", "ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/ai/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

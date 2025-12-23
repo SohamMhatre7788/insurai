@@ -22,33 +22,61 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final UserDetailsServiceImpl userDetailsService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+protected boolean shouldNotFilter(HttpServletRequest request) {
+    String path = request.getRequestURI();
 
-        final String authorizationHeader = request.getHeader("Authorization");
+    return path.startsWith("/api/client")
+            || path.startsWith("/auth");
+}
 
-        String email = null;
-        String jwt = null;
 
+   @Override
+protected void doFilterInternal(HttpServletRequest request,
+                                HttpServletResponse response,
+                                FilterChain filterChain)
+        throws ServletException, IOException {
+
+    final String authorizationHeader = request.getHeader("Authorization");
+
+    String email = null;
+    String jwt = null;
+
+    try {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
-            try {
-                email = jwtUtil.extractUsername(jwt);
-            } catch (Exception e) {
-                logger.error("JWT extraction failed: " + e.getMessage());
-            }
-        }
 
-        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-
-            if (jwtUtil.validateToken(jwt, userDetails.getUsername())) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authToken);
+            // 🔴 Extra safety check
+            if (jwt.split("\\.").length != 3) {
+                throw new RuntimeException("Invalid JWT format");
             }
+
+            email = jwtUtil.extractUsername(jwt);
         }
-        filterChain.doFilter(request, response);
+    } catch (Exception e) {
+        logger.error("JWT authentication failed: " + e.getMessage());
+
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json");
+        response.getWriter().write("{\"error\":\"Invalid or expired token\"}");
+        return; // ⛔ STOP FILTER CHAIN
     }
+
+    if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+
+        if (jwtUtil.validateToken(jwt, userDetails.getUsername())) {
+            UsernamePasswordAuthenticationToken authToken =
+                    new UsernamePasswordAuthenticationToken(
+                            userDetails, null, userDetails.getAuthorities());
+
+            authToken.setDetails(
+                    new WebAuthenticationDetailsSource().buildDetails(request));
+
+            SecurityContextHolder.getContext().setAuthentication(authToken);
+        }
+    }
+
+    filterChain.doFilter(request, response);
+}
+
 }
