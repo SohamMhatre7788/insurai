@@ -3,6 +3,8 @@ import { userService } from '../../services';
 import '../Auth/Auth.css';
 
 const Profile = () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+
     const [profile, setProfile] = useState({
         firstName: '',
         lastName: '',
@@ -25,7 +27,7 @@ const Profile = () => {
 
     const fetchProfile = async () => {
         try {
-            const data = await userService.getProfile();
+            const data = await userService.getProfile(user.userId);
             setProfile({
                 firstName: data.firstName,
                 lastName: data.lastName,
@@ -53,8 +55,25 @@ const Profile = () => {
     const handleProfileSubmit = async (e) => {
         e.preventDefault();
         try {
-            await userService.updateProfile(profile);
-            setProfileSuccess('Profile updated successfully!');
+            const updatedUser = await userService.updateProfile(user.userId, profile);
+
+setProfileSuccess('Profile updated successfully!');
+
+// 🔥 UPDATE localStorage user
+const storedUser = JSON.parse(localStorage.getItem("user"));
+localStorage.setItem(
+    "user",
+    JSON.stringify({
+        ...storedUser,
+        firstName: updatedUser.firstName,
+        lastName: updatedUser.lastName,
+        email: updatedUser.email,
+    })
+);
+
+// 🔄 Refresh navbar instantly
+window.location.reload();
+
         } catch (error) {
             setProfileError(error.response?.data?.error || 'Failed to update profile');
         }
@@ -70,10 +89,13 @@ const Profile = () => {
         }
 
         try {
-            await userService.changePassword({
-                currentPassword: passwordData.currentPassword,
-                newPassword: passwordData.newPassword,
-            });
+            await userService.changePassword(user.userId, {
+    currentPassword: passwordData.currentPassword,
+    newPassword: passwordData.newPassword,
+    confirmNewPassword: passwordData.confirmNewPassword,
+});
+
+
             setPasswordSuccess('Password changed successfully!');
             setPasswordData({
                 currentPassword: '',
