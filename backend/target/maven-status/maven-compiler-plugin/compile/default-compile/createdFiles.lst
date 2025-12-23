@@ -3,6 +3,7 @@ com\insurai\entity\ClientPolicy.class
 com\insurai\dto\clientpolicy\ClientPolicyResponse.class
 com\insurai\entity\User.class
 com\insurai\exception\GlobalExceptionHandler.class
+com\insurai\service\GeminiAiService.class
 com\insurai\InsuraiApplication.class
 com\insurai\entity\User$Role.class
 com\insurai\dto\claim\ApproveClaimRequest.class
@@ -24,6 +25,7 @@ com\insurai\dto\user\UserProfileResponse.class
 com\insurai\repository\ClaimRepository.class
 com\insurai\service\ClientPolicyService.class
 com\insurai\config\SecurityConfig.class
+com\insurai\controller\AiRecommendationController.class
 com\insurai\security\UserDetailsServiceImpl.class
 com\insurai\controller\AuthController.class
 com\insurai\dto\policy\PolicyResponse.class

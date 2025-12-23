@@ -20,7 +20,7 @@ import CreatePolicy from './pages/Admin/CreatePolicy';
 import ManagePolicies from './pages/Admin/ManagePolicies';
 import ManageClaims from './pages/Admin/ManageClaims';
 import ManageClients from './pages/Admin/ManageClients';
-
+import CorporateAiAssistant from './pages/Admin/CorporateAiAssistant';
 import './styles/index.css';
 
 const AppRoutes = () => {
@@ -55,6 +55,14 @@ const AppRoutes = () => {
                     element={
                         <ProtectedRoute requiredRole="CLIENT">
                             <ClientDashboard />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/client/corporate-ai"
+                    element={
+                        <ProtectedRoute requiredRole="CLIENT">
+                            <CorporateAiAssistant />
                         </ProtectedRoute>
                     }
                 />
@@ -97,6 +105,14 @@ const AppRoutes = () => {
                     element={
                         <ProtectedRoute requiredRole="ADMIN">
                             <AdminDashboard />
+                        </ProtectedRoute>
+                    }
+                />
+                   <Route
+                    path="/admin/corporate-ai"
+                    element={
+                        <ProtectedRoute requiredRole="ADMIN">
+                            <CorporateAiAssistant />
                         </ProtectedRoute>
                     }
                 />

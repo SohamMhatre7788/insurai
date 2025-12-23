@@ -43,6 +43,7 @@ public class SecurityConfig {
                         .requestMatchers("/client-policies/**").hasRole("CLIENT")
                         .requestMatchers("/claims/**").hasAnyRole("CLIENT", "ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/ai/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

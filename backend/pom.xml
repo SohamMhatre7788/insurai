@@ -73,7 +73,11 @@
             <version>${jwt.version}</version>
             <scope>runtime</scope>
         </dependency>
-        
+        <dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+</dependency>
+
         <!-- Cloudinary -->
         <dependency>
             <groupId>com.cloudinary</groupId>
