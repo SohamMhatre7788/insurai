@@ -25,10 +25,15 @@ export const policyService = {
 };
 
 export const clientPolicyService = {
-    buyPolicy: async (data) => {
-        const response = await api.post('/client-policies', data);
-        return response.data;
-    },
+  buyPolicy: async (data) => {
+    const response = await api.post("/client-policies", {
+      policyId: Number(data.policyId),
+      companyName: data.companyName,
+      numberOfEmployees: Number(data.numberOfEmployees),
+      policyPeriodYears: Number(data.policyPeriodYears)
+    });
+    return response.data;
+  },
 
     getMyPolicies: async () => {
         const response = await api.get('/client-policies');

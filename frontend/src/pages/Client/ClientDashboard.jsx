@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { clientPolicyService, claimService } from '../../services';
 import './ClientDashboard.css';
-
+import { useNavigate } from "react-router-dom";
 const ClientDashboard = () => {
     const [stats, setStats] = useState({
         totalPolicies: 0,
@@ -10,7 +10,7 @@ const ClientDashboard = () => {
         pendingClaims: 0,
     });
     const [loading, setLoading] = useState(true);
-
+const navigate = useNavigate();
     useEffect(() => {
         const fetchStats = async () => {
             try {
@@ -99,6 +99,13 @@ const ClientDashboard = () => {
                     </Link>
                 </div>
             </div>
+             <button
+  className="ai-fab"
+  onClick={() => navigate("/client/corporate-ai")}
+  title="Corporate AI Assistant"
+>
+  🤖
+</button>
         </div>
     );
 };

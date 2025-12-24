@@ -9,10 +9,17 @@ const api = axios.create({
 
 // Request interceptor to add JWT token
 api.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user"));
+
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+
     if (user?.userId) {
         config.headers["X-User-Id"] = user.userId;
     }
+
     return config;
 });
 
