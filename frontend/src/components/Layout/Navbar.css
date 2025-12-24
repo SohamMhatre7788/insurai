@@ -1,80 +1,90 @@
+/* ===============================
+   NAVBAR (DEEP NAVY)
+   =============================== */
 .navbar {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: var(--shadow-md);
+    background: #192230; /* Deep Navy */
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid var(--neutral-200);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
+/* Navbar container */
 .navbar-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 var(--spacing-lg);
+    padding: 0 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 70px;
 }
 
+/* ===============================
+   LOGO
+   =============================== */
 .navbar-logo {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
-    font-size: var(--font-size-xl);
+    gap: 10px;
+    font-size: 20px;
     font-weight: 700;
-    color: var(--primary-600);
+    color: #FFFFFF;
     text-decoration: none;
-    transition: all var(--transition-normal);
+    letter-spacing: 0.3px;
+    transition: opacity 0.25s ease;
 }
 
 .navbar-logo:hover {
-    transform: scale(1.05);
-    color: var(--primary-700);
+    opacity: 0.85;
 }
 
 .logo-icon {
-    font-size: var(--font-size-2xl);
+    font-size: 24px;
+    color: #3DA199; /* Teal Green */
 }
 
 .logo-text {
-    background: linear-gradient(135deg, var(--primary-600), var(--secondary-600));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #FFFFFF;
 }
 
+/* ===============================
+   NAV LINKS
+   =============================== */
 .navbar-links {
     display: flex;
     align-items: center;
-    gap: var(--spacing-lg);
+    gap: 20px;
 }
 
 .nav-link {
-    color: var(--neutral-700);
+    color: #BDC4D4; /* Ivory */
     font-weight: 500;
-    font-size: var(--font-size-sm);
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-md);
-    transition: all var(--transition-fast);
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 10px;
     text-decoration: none;
+    transition: all 0.25s ease;
 }
 
 .nav-link:hover {
-    color: var(--primary-600);
-    background: var(--primary-50);
+    color: #FFFFFF;
+    background: rgba(61, 161, 153, 0.15); /* Teal tint */
 }
 
+/* ===============================
+   USER SECTION
+   =============================== */
 .nav-user {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
-    padding-left: var(--spacing-lg);
-    border-left: 2px solid var(--neutral-200);
+    gap: 14px;
+    padding-left: 20px;
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .user-name {
     font-weight: 600;
-    color: var(--neutral-800);
+    color: #BDC4D4;
 }

@@ -1,31 +1,87 @@
+/* ===============================
+   APP LAYOUT (SHELL)
+   =============================== */
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #1C2E4A; /* Midnight Blue – app frame */
+}
+
+/* ===============================
+   MAIN CONTENT (READING ZONE)
+   =============================== */
+.main-content {
+    flex: 1;
+    padding: 32px 24px;
+    background: #eef2f7; /* Buttercream */
+    color: #0F1A2B; /* Deep Navy text */
+    border-radius: 20px 20px 0 0;
+    margin: 0 16px;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* Subtle entrance */
+.main-content > * {
+    animation: fadeIn 0.45s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===============================
+   FOOTER (ANCHOR, NOT FOCUS)
+   =============================== */
 .footer {
-  background-color: #66717c;
-  color: #ffffff;
-  padding: 40px 20px;
+    background: #0F1A2B; /* Deep Navy */
+    color: #BDC4D4; /* Ivory text */
+    padding: 36px 20px;
+    text-align: center;
+    margin-top: auto;
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.35);
 }
 
+/* Footer container */
 .footer-container {
-  max-width: 1100px;
-  margin: auto;
-  text-align: center;
+    max-width: 1100px;
+    margin: auto;
 }
 
-.footer-about a{
-  color: #ffffff;
+/* About section */
+.footer-about strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 14px;
+    color: #FFFFFF;
+    letter-spacing: 0.3px;
 }
 
-
-/*
 .footer-about p {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #d1d5db;
-  max-width: 600px;
-  margin: auto;
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 720px;
+    margin: auto;
+    color: #BDC4D4;
 }
 
-.footer-bottom {
-  margin-top: 30px;
-  font-size: 12px;
-  color: #9ca3af;
-} */
+/* Footer links */
+.footer-about a {
+    color: #3DA199; /* Teal Green */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.25s ease;
+}
+
+.footer-about a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
