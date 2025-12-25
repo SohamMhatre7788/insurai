@@ -27,13 +27,23 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
-    const login = (authData) => {
-        const { token, ...userData } = authData;
-        setToken(token);
-        setUser(userData);
-        localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(userData));
+   const login = (authData) => {
+    const { token, id, email, first_name, last_name, role } = authData;
+
+    const userData = {
+        id,                 // important for CorporateAiAssistant
+        email,
+        firstName: first_name, // normalize field names
+        lastName: last_name,
+        role
     };
+
+    setToken(token);
+    setUser(userData);
+
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(userData));
+};
 
     const logout = () => {
         setToken(null);

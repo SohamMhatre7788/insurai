@@ -30,7 +30,7 @@
     gap: 10px;
     font-size: 20px;
     font-weight: 700;
-    color: #FFFFFF;
+    color: #ffffff;
     text-decoration: none;
     letter-spacing: 0.3px;
     transition: opacity 0.25s ease;
@@ -59,7 +59,7 @@
 }
 
 .nav-link {
-    color: #BDC4D4; /* Ivory */
+    color: #ffffff; /* Ivory */
     font-weight: 500;
     font-size: 14px;
     padding: 8px 14px;
