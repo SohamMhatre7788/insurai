@@ -1,24 +1,43 @@
 import "./Footer.css";
 
 const Footer = () => {
+  const teamMembers = [
+    { name: 'Soham Mhatre', link: 'https://www.linkedin.com/in/soham-sunil-mhatre' },
+    { name: 'Srushti Gadakh', link: 'https://www.linkedin.com/in/srushti-gadakh-81796725b' },
+    { name: 'Paridhi Gupta', link: 'https://www.linkedin.com/in/paridhi-gupta-968aa1293/' },
+    { name: 'Rishikesh Wakchaure', link: 'https://www.linkedin.com/in/rishikesh-wakchaure-06055524b/' },
+    { name: 'Sanskar More', link: 'https://www.linkedin.com/in/sanskar-more-740793232' }
+  ];
+
   return (
     <footer className="footer">
       <div className="footer-container">
-        
-        {/* About Us Section */}
         <div className="footer-about">
           <strong>About Us</strong>
           <p>
-                Welcome to our team project, this project is the part of Infosys Springboard Virtual Internship 6.0.<br/>
-                Our Team has 5 Members,
-                <br/><a href="https://www.linkedin.com/in/soham-sunil-mhatre" target="_blank">Soham Mhatre</a>
-                <br/><a href="https://www.linkedin.com/in/rishikesh-wakchaure-06055524b/" target="_blank">Rishikesh Wakchaure</a>
-                <br/><a href="https://www.linkedin.com/in/sanskar-more-740793232" target="_blank">Sanskar More</a>
-                <br/><a href="https://www.linkedin.com/in/srushti-gadakh-81796725b " target="_blank">Srushti Gadakh</a>
-                <br/><a href="https://www.linkedin.com/in/paridhi-gupta-968aa1293/" target="_blank">Paridhi Gupta</a><br/> 
+            Welcome to our team project! This project is part of Infosys Springboard Virtual Internship 6.0.
           </p>
+          
+          <div className="footer-team">
+            {teamMembers.map((member) => (
+              <a
+                key={member.name}
+                href={member.link}
+                target="_blank"
+                rel="noreferrer"
+                className="team-member"
+              >
+                {member.name} 
+                <span className="linkedin-icon">
+                  {/* LinkedIn "in" icon */}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16" fill="#0A66C2">
+                    <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.57 0 54S24.09 0 53.79 0s53.79 24.57 53.79 54-24.09 54-53.79 54zM447.9 448h-92.68V302.4c0-34.7-12.42-58.3-43.48-58.3-23.73 0-37.85 16-44.06 31.4-2.26 5.5-2.82 13.1-2.82 20.7V448h-92.78s1.22-241.8 0-266.1h92.78v37.7c-.18.3-.43.6-.61.9h.61v-.9c12.3-19 34.33-46.1 83.5-46.1 60.9 0 106.6 39.7 106.6 125.1V448z"/>
+                  </svg>
+                </span>
+              </a>
+            ))}
+          </div>
         </div>
-
       </div>
     </footer>
   );
