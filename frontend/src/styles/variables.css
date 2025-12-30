@@ -158,10 +158,10 @@
    DARK THEME OVERRIDES
    ========================= */
 body[data-theme="dark"] {
-  --bg-app: linear-gradient(135deg, #0f172a, #111827);
+  --bg-app: #0b1422;
   --bg-content: #0f172a;
   --bg-muted: #111827;
-  --card-bg: rgba(17, 24, 39, 0.8);
+  --card-bg: #111827;
   --navbar-bg: #0b1422;
   --footer-bg: #0b1422;
 
@@ -176,13 +176,13 @@ body[data-theme="dark"] {
   --table-header-bg: rgba(255, 255, 255, 0.06);
   --table-row-hover: rgba(255, 255, 255, 0.04);
 
-  --btn-primary-bg: linear-gradient(135deg, #1C2E4A, #52677D);
+  --btn-primary-bg: #52677D;
   --btn-primary-text: #ffffff;
-  --btn-secondary-bg: linear-gradient(135deg, #6f728f, #2f3b57);
+  --btn-secondary-bg: #1C2E4A;
   --btn-secondary-text: #ffffff;
-  --btn-outline-border: #93c5fd;
-  --btn-outline-text: #93c5fd;
-  --btn-outline-hover-bg: #93c5fd;
+  --btn-outline-border: #7a8fa8;
+  --btn-outline-text: #7a8fa8;
+  --btn-outline-hover-bg: #52677D;
   --btn-outline-hover-text: #0b1422;
 
   --badge-low-bg: rgba(61, 161, 153, 0.18);

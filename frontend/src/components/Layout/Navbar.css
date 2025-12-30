@@ -4,7 +4,7 @@
     top: 0;
     z-index: 1000;
     border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    box-shadow: none;
 }
 
 /* Navbar container */
@@ -27,11 +27,11 @@
     color: var(--text-inverse);
     text-decoration: none;
     letter-spacing: 0.3px;
-    transition: opacity 0.25s ease;
+    transition: none;
 }
 
 .navbar-logo:hover {
-    opacity: 0.85;
+    opacity: 1;
 }
 
 .logo-icon {
@@ -56,12 +56,12 @@
     padding: 8px 14px;
     border-radius: 10px;
     text-decoration: none;
-    transition: all 0.25s ease;
+    transition: none;
 }
 
 .nav-link:hover {
     color: var(--text-inverse);
-    background: rgba(61, 161, 153, 0.15);
+    background: rgba(255, 255, 255, 0.06);
 }
 
 .nav-user {
@@ -88,18 +88,18 @@
     border: 1px solid var(--border-color);
     background: transparent;
     color: var(--text-inverse);
-    transition: all var(--transition-fast);
+    transition: none;
 }
 .theme-toggle:hover {
-    transform: translateY(-1px);
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+    transform: none;
+    background: transparent;
+    box-shadow: none;
 }
 
 body[data-theme="dark"] .theme-toggle:hover {
-    background: rgba(56, 189, 248, 0.15);
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
-    border-color: rgba(56, 189, 248, 0.3);
+    background: transparent;
+    box-shadow: none;
+    border-color: var(--border-color);
 }
 
 /* Tooltip styling */
@@ -117,7 +117,7 @@ body[data-theme="dark"] .theme-toggle:hover {
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.2s ease;
+    transition: none;
     pointer-events: none;
     z-index: 1001;
 }
@@ -127,9 +127,9 @@ body[data-theme="dark"] .theme-toggle:hover {
 }
 
 .theme-toggle:hover .theme-name-tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-5px);
 }
 
 body[data-theme="dark"] .theme-name-tooltip {

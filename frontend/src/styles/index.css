@@ -56,13 +56,13 @@ h6 {
 }
 
 a {
-    color: var(--primary-600);
+    color: var(--primary-500);
     text-decoration: none;
-    transition: color var(--transition-fast);
+    transition: none;
 }
 
 a:hover {
-    color: var(--primary-700);
+    color: var(--primary-600);
 }
 
 button {
@@ -70,7 +70,7 @@ button {
     cursor: pointer;
     border: none;
     outline: none;
-    transition: all var(--transition-normal);
+    transition: none;
 }
 
 input,
@@ -92,20 +92,19 @@ select {
 
 .card {
     background: var(--card-bg);
-    backdrop-filter: blur(10px);
     border-radius: var(--radius-lg);
     padding: var(--spacing-xl);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-sm);
     border: 1px solid var(--border-color);
 }
 
 .card-hover {
-    transition: all var(--transition-normal);
+    transition: none;
 }
 
 .card-hover:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
+    transform: none;
+    box-shadow: var(--shadow-sm);
 }
 
 .btn {
@@ -117,32 +116,32 @@ select {
     align-items: center;
     justify-content: center;
     gap: var(--spacing-sm);
-    transition: all var(--transition-normal);
+    transition: none;
     text-decoration: none;
 }
 
 .btn-primary {
     background: var(--btn-primary-bg);
     color: var(--btn-primary-text);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, var(--primary-700), var(--primary-600));
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    background: var(--btn-primary-bg);
+    transform: none;
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary {
     background: var(--btn-secondary-bg);
     color: var(--btn-secondary-text);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary:hover {
-    background: linear-gradient(135deg, var(--secondary-700), var(--secondary-600));
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    background: var(--btn-secondary-bg);
+    transform: none;
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-outline {
@@ -157,22 +156,22 @@ select {
 }
 
 .btn-danger {
-    background: linear-gradient(135deg, var(--danger), var(--danger-dark));
+    background: var(--danger);
     color: white;
 }
 
 .btn-danger:hover {
-    background: linear-gradient(135deg, var(--danger-dark), var(--danger));
-    transform: translateY(-2px);
+    background: var(--danger);
+    transform: none;
 }
 
 .btn-success {
-    background: linear-gradient(135deg, var(--success), var(--success-dark));
+    background: var(--success);
     color: white;
 }
 
 .btn-success:hover {
-    background: linear-gradient(135deg, var(--success-dark), var(--success));
+    background: var(--success);
 }
 
 .input-group {
@@ -262,30 +261,13 @@ select {
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+    animation: none;
 }
 
 .fade-in {
-    animation: fadeIn 0.5s ease-in;
+    animation: none;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 /* Accessibility helpers */
 .sr-only {
