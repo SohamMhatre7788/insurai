@@ -1,12 +1,9 @@
-/* ===============================
-   NAVBAR (DEEP NAVY)
-   =============================== */
 .navbar {
-    background: #192230; /* Deep Navy */
+    background: var(--navbar-bg);
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--border-color);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
@@ -21,16 +18,13 @@
     height: 70px;
 }
 
-/* ===============================
-   LOGO
-   =============================== */
 .navbar-logo {
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: 20px;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--text-inverse);
     text-decoration: none;
     letter-spacing: 0.3px;
     transition: opacity 0.25s ease;
@@ -42,16 +36,13 @@
 
 .logo-icon {
     font-size: 24px;
-    color: #3DA199; /* Teal Green */
+    color: var(--success);
 }
 
 .logo-text {
-    color: #FFFFFF;
+    color: var(--text-inverse);
 }
 
-/* ===============================
-   NAV LINKS
-   =============================== */
 .navbar-links {
     display: flex;
     align-items: center;
@@ -59,7 +50,7 @@
 }
 
 .nav-link {
-    color: #ffffff; /* Ivory */
+    color: var(--text-inverse);
     font-weight: 500;
     font-size: 14px;
     padding: 8px 14px;
@@ -69,22 +60,37 @@
 }
 
 .nav-link:hover {
-    color: #FFFFFF;
-    background: rgba(61, 161, 153, 0.15); /* Teal tint */
+    color: var(--text-inverse);
+    background: rgba(61, 161, 153, 0.15);
 }
 
-/* ===============================
-   USER SECTION
-   =============================== */
 .nav-user {
     display: flex;
     align-items: center;
     gap: 14px;
     padding-left: 20px;
-    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    border-left: 1px solid var(--border-color);
 }
 
 .user-name {
     font-weight: 600;
-    color: #BDC4D4;
+    color: var(--secondary-500);
+}
+
+/* Theme toggle */
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-inverse);
+    transition: all var(--transition-fast);
+}
+.theme-toggle:hover {
+    transform: translateY(-1px);
+    background: rgba(255,255,255,0.08);
 }

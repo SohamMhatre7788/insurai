@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './Navbar.css';
+import ThemeToggle from '../Common/ThemeToggle';
 
 const Navbar = () => {
     const { user, isAuthenticated, isClient, isAdmin, logout } = useAuth();
@@ -51,6 +52,7 @@ const Navbar = () => {
                         </>
                     ) : null}
                 </div>
+                <ThemeToggle />
             </div>
         </nav>
     );

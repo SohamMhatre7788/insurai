@@ -13,7 +13,7 @@
 }
 
 .dashboard-header p {
-    color: var(--neutral-600);
+    color: var(--text-secondary);
     font-size: var(--font-size-lg);
 }
 
@@ -29,7 +29,10 @@
     align-items: center;
     gap: var(--spacing-lg);
     padding: var(--spacing-xl);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .stat-icon {
@@ -43,7 +46,7 @@
 }
 
 .stat-content p {
-    color: var(--neutral-600);
+    color: var(--text-secondary);
     font-size: var(--font-size-sm);
     margin: 0;
 }
@@ -65,6 +68,9 @@
     cursor: pointer;
     text-decoration: none;
     color: inherit;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .action-icon {
@@ -78,8 +84,13 @@
 }
 
 .action-card p {
-    color: var(--neutral-600);
+    color: var(--text-secondary);
     font-size: var(--font-size-sm);
+}
+
+.action-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
 }
 /* ===============================
    AI FLOATING ACTION BUTTON
@@ -91,8 +102,8 @@
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #0F1A2B, #1C2E4A);
-    color: #FFFFFF;
+    background: linear-gradient(135deg, var(--primary-800), var(--primary-600));
+    color: var(--text-inverse);
     font-size: 28px;
     border: none;
     cursor: pointer;
@@ -109,7 +120,7 @@
 /* Hover Effect */
 .ai-fab:hover {
     transform: scale(1.12);
-    background: linear-gradient(135deg, #1C2E4A, #3DA199);
+    background: linear-gradient(135deg, var(--primary-600), var(--success));
     box-shadow: 0 20px 45px rgba(61, 161, 153, 0.6);
 }
 

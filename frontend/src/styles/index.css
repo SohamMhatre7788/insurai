@@ -10,8 +10,8 @@ body {
     font-family: var(--font-family);
     font-size: var(--font-size-base);
     line-height: 1.6;
-    color: var(--neutral-800);
-    background: linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-50) 100%);
+    color: var(--text-primary);
+    background: var(--bg-app);
     min-height: 100vh;
 }
 
@@ -27,7 +27,7 @@ h5,
 h6 {
     font-weight: 600;
     line-height: 1.2;
-    color: var(--neutral-900);
+    color: var(--text-primary);
     margin-bottom: var(--spacing-md);
 }
 
@@ -79,6 +79,8 @@ select {
     font-family: var(--font-family);
     font-size: var(--font-size-base);
     outline: none;
+    color: var(--text-primary);
+    background: var(--bg-content);
 }
 
 /* Utility Classes */
@@ -89,12 +91,12 @@ select {
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--card-bg);
     backdrop-filter: blur(10px);
     border-radius: var(--radius-lg);
     padding: var(--spacing-xl);
     box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--border-color);
 }
 
 .card-hover {
@@ -120,8 +122,8 @@ select {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-600), var(--primary-500));
-    color: white;
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
     box-shadow: var(--shadow-md);
 }
 
@@ -132,8 +134,8 @@ select {
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, var(--secondary-600), var(--secondary-500));
-    color: white;
+    background: var(--btn-secondary-bg);
+    color: var(--btn-secondary-text);
     box-shadow: var(--shadow-md);
 }
 
@@ -145,14 +147,13 @@ select {
 
 .btn-outline {
     background: transparent;
-    border: 2px solid var(--primary-600);
-    color: white;
-
+    border: 2px solid var(--btn-outline-border);
+    color: var(--btn-outline-text);
 }
 
 .btn-outline:hover {
-    background: var(--primary-600);
-    color: white;
+    background: var(--btn-outline-hover-bg);
+    color: var(--btn-outline-hover-text);
 }
 
 .btn-danger {
@@ -182,7 +183,7 @@ select {
     display: block;
     margin-bottom: var(--spacing-sm);
     font-weight: 500;
-    color: var(--neutral-700);
+    color: var(--text-secondary);
     font-size: var(--font-size-sm);
 }
 
@@ -193,16 +194,16 @@ select {
     border-radius: var(--radius-md);
     font-size: var(--font-size-base);
     transition: all var(--transition-fast);
-    background: white;
+    background: var(--bg-content);
 }
 
 .input-field:focus {
     border-color: var(--primary-500);
-    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+    box-shadow: var(--focus-ring);
 }
 
 .input-field::placeholder {
-    color: var(--neutral-400);
+    color: var(--text-muted);
 }
 
 .error-message {
@@ -225,6 +226,7 @@ select {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    border: 1px solid var(--border-color);
 }
 
 .badge-success {
@@ -243,8 +245,8 @@ select {
 }
 
 .badge-info {
-    background: var(--primary-100);
-    color: var(--primary-700);
+    background: var(--badge-info-bg);
+    color: var(--badge-info-text);
 }
 
 .loading {
@@ -283,4 +285,34 @@ select {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Accessibility helpers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Tables polish */
+.policies-table {
+    background: var(--bg-content);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+.policies-table thead {
+    background: var(--table-header-bg);
+}
+.policies-table th, .policies-table td {
+    border-bottom: 1px solid var(--border-color);
+}
+.policies-table tbody tr:hover {
+    background: var(--table-row-hover);
 }

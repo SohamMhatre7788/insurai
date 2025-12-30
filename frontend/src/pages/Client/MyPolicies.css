@@ -5,6 +5,7 @@
 .empty-state {
     text-align: center;
     padding: var(--spacing-2xl);
+    border: 1px solid var(--border-color);
 }
 
 .policies-table-container {
@@ -14,42 +15,47 @@
 .policies-table {
     width: 100%;
     border-collapse: collapse;
+    background: var(--bg-content);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
 }
 
 .policies-table thead {
-    background: var(--neutral-100);
+    background: var(--table-header-bg);
 }
 
 .policies-table th {
     padding: var(--spacing-md);
     text-align: left;
     font-weight: 600;
-    color: var(--neutral-700);
-    border-bottom: 2px solid var(--neutral-300);
+    color: var(--text-secondary);
+    border-bottom: 2px solid var(--border-color);
 }
 
 .policies-table td {
     padding: var(--spacing-md);
-    border-bottom: 1px solid var(--neutral-200);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .policies-table tbody tr:hover {
-    background: var(--neutral-50);
+    background: var(--table-row-hover);
 }
 
 .badge-active {
-    background: var(--success-light);
-    color: var(--success-dark);
+    background: var(--badge-low-bg);
+    color: var(--badge-low-text);
 }
 
 .badge-expired {
-    background: var(--neutral-200);
-    color: var(--neutral-600);
+    background: var(--table-header-bg);
+    color: var(--text-secondary);
 }
 
 .badge-cancelled {
-    background: var(--danger-light);
-    color: var(--danger-dark);
+    background: var(--badge-high-bg);
+    color: var(--badge-high-text);
 }
 
 .btn-sm {

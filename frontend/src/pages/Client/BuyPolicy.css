@@ -17,6 +17,8 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
+    border: 1px solid var(--border-color);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .policy-header {
@@ -26,7 +28,7 @@
 }
 
 .policy-description {
-    color: var(--neutral-600);
+    color: var(--text-secondary);
     font-size: var(--font-size-sm);
     line-height: 1.6;
 }
@@ -34,8 +36,9 @@
 .policy-details {
     margin: var(--spacing-md) 0;
     padding: var(--spacing-md);
-    background: var(--neutral-50);
+    background: var(--bg-muted);
     border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
 }
 
 .detail-item {
@@ -45,28 +48,28 @@
 }
 
 .detail-label {
-    color: var(--neutral-600);
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
 .detail-value {
-    color: var(--neutral-800);
+    color: var(--text-primary);
     font-weight: 600;
 }
 
 .badge-low {
-    background: var(--success-light);
-    color: var(--success-dark);
+    background: var(--badge-low-bg);
+    color: var(--badge-low-text);
 }
 
 .badge-medium {
-    background: var(--warning-light);
-    color: var(--warning-dark);
+    background: var(--badge-medium-bg);
+    color: var(--badge-medium-text);
 }
 
 .badge-high {
-    background: var(--danger-light);
-    color: var(--danger-dark);
+    background: var(--badge-high-bg);
+    color: var(--badge-high-text);
 }
 
 .purchase-form-container {
@@ -77,14 +80,16 @@
 .selected-policy-summary {
     margin-bottom: var(--spacing-xl);
     text-align: center;
+    border: 1px solid var(--border-color);
 }
 
 .premium-summary {
     padding: var(--spacing-lg);
-    background: var(--primary-50);
+    background: var(--bg-muted);
     border-radius: var(--radius-md);
     text-align: center;
     margin: var(--spacing-lg) 0;
+    border: 1px solid var(--border-color);
 }
 
 .premium-summary h4 {
@@ -120,4 +125,9 @@
     gap: var(--spacing-md);
     justify-content: center;
     margin-top: var(--spacing-xl);
+}
+
+.policy-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
 }

@@ -1,6 +1,6 @@
 :root {
   /* =========================
-     BRAND COLOR PALETTE
+     BRAND PALETTE
      ========================= */
 
   /* Primary – Midnight / Navy scale */
@@ -28,7 +28,7 @@
   --secondary-900: #555b6a;
 
   /* =========================
-     STATUS COLORS (kept subtle)
+     STATUS COLORS
      ========================= */
 
   --success: #3DA199;            /* Teal Green */
@@ -59,9 +59,61 @@
   --neutral-900: #171717;
 
   /* =========================
-     SPACING (UNCHANGED)
+     SEMANTIC TOKENS (LIGHT DEFAULT)
      ========================= */
 
+  /* App surfaces */
+  --bg-app: linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-50) 100%);
+  --bg-content: #ffffff;
+  --bg-muted: var(--neutral-100);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --navbar-bg: #192230;
+  --footer-bg: #0F1A2B;
+
+  /* Text */
+  --text-primary: var(--neutral-900);
+  --text-secondary: var(--neutral-700);
+  --text-inverse: #ffffff;
+  --text-muted: var(--neutral-600);
+
+  /* Borders & shadows */
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.14);
+  --shadow-xl: 0 24px 40px rgba(0, 0, 0, 0.18);
+
+  /* Buttons */
+  --btn-primary-bg: linear-gradient(135deg, var(--primary-600), var(--primary-500));
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: linear-gradient(135deg, var(--secondary-600), var(--secondary-500));
+  --btn-secondary-text: #ffffff;
+  --btn-outline-border: var(--primary-600);
+  --btn-outline-text: var(--primary-600);
+  --btn-outline-hover-bg: var(--primary-600);
+  --btn-outline-hover-text: #ffffff;
+
+  /* Tables */
+  --table-header-bg: var(--neutral-100);
+  --table-row-hover: var(--neutral-50);
+
+  /* Badges */
+  --badge-low-bg: var(--success-light);
+  --badge-low-text: var(--success-dark);
+  --badge-medium-bg: var(--warning-light);
+  --badge-medium-text: var(--warning-dark);
+  --badge-high-bg: var(--danger-light);
+  --badge-high-text: var(--danger-dark);
+  --badge-info-bg: var(--primary-100);
+  --badge-info-text: var(--primary-700);
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 3px rgba(14, 165, 233, 0.18);
+
+  /* =========================
+     SPACING
+     ========================= */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
@@ -80,15 +132,6 @@
   --radius-full: 9999px;
 
   /* =========================
-     SHADOWS
-     ========================= */
-
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.10);
-  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.14);
-  --shadow-xl: 0 24px 40px rgba(0, 0, 0, 0.18);
-
-  /* =========================
      TRANSITIONS
      ========================= */
 
@@ -97,7 +140,7 @@
   --transition-slow: 350ms ease-in-out;
 
   /* =========================
-     TYPOGRAPHY (UNCHANGED)
+     TYPOGRAPHY
      ========================= */
 
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
@@ -109,4 +152,45 @@
   --font-size-2xl: 1.5rem;
   --font-size-3xl: 1.875rem;
   --font-size-4xl: 2.25rem;
+}
+
+/* =========================
+   DARK THEME OVERRIDES
+   ========================= */
+body[data-theme="dark"] {
+  --bg-app: linear-gradient(135deg, #0f172a, #111827);
+  --bg-content: #0f172a;
+  --bg-muted: #111827;
+  --card-bg: rgba(17, 24, 39, 0.8);
+  --navbar-bg: #0b1422;
+  --footer-bg: #0b1422;
+
+  --text-primary: #e5e7eb;
+  --text-secondary: #cbd5e1;
+  --text-inverse: #ffffff;
+  --text-muted: #94a3b8;
+
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+
+  --table-header-bg: rgba(255, 255, 255, 0.06);
+  --table-row-hover: rgba(255, 255, 255, 0.04);
+
+  --btn-primary-bg: linear-gradient(135deg, #1C2E4A, #52677D);
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: linear-gradient(135deg, #6f728f, #2f3b57);
+  --btn-secondary-text: #ffffff;
+  --btn-outline-border: #93c5fd;
+  --btn-outline-text: #93c5fd;
+  --btn-outline-hover-bg: #93c5fd;
+  --btn-outline-hover-text: #0b1422;
+
+  --badge-low-bg: rgba(61, 161, 153, 0.18);
+  --badge-low-text: #79e0d2;
+  --badge-medium-bg: rgba(201, 162, 39, 0.18);
+  --badge-medium-text: #fbd38d;
+  --badge-high-bg: rgba(184, 74, 74, 0.18);
+  --badge-high-text: #fca5a5;
+  --badge-info-bg: rgba(82, 103, 125, 0.18);
+  --badge-info-text: #93c5fd;
 }

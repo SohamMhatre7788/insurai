@@ -1,21 +1,15 @@
-/* ===============================
-   APP LAYOUT (SHELL)
-   =============================== */
 .layout {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: #1C2E4A; /* Midnight Blue – app frame */
+    background: var(--navbar-bg);
 }
 
-/* ===============================
-   MAIN CONTENT (READING ZONE)
-   =============================== */
 .main-content {
     flex: 1;
     padding: 32px 24px;
-    background: #e4e7ed; /* Buttercream */
-    color: #0F1A2B; /* Deep Navy text */
+    background: var(--bg-muted);
+    color: var(--text-primary);
     border-radius: 20px 20px 0 0;
     margin: 0 16px;
     box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
@@ -38,12 +32,9 @@
     }
 }
 
-/* ===============================
-   FOOTER (ANCHOR, NOT FOCUS)
-   =============================== */
 .footer {
-    background: #0F1A2B; /* Deep Navy */
-    color: #BDC4D4; /* Ivory text */
+    background: var(--footer-bg);
+    color: var(--text-secondary);
     padding: 36px 20px;
     text-align: center;
     margin-top: auto;
@@ -61,7 +52,7 @@
     display: block;
     font-size: 18px;
     margin-bottom: 14px;
-    color: #FFFFFF;
+    color: var(--text-inverse);
     letter-spacing: 0.3px;
 }
 
@@ -70,19 +61,19 @@
     line-height: 1.8;
     max-width: 720px;
     margin: auto;
-    color: #eaecf2;
+    color: var(--text-secondary);
 }
 
 /* Footer links */
 .footer-about a {
-    color: #dae2e1; /* Teal Green */
+    color: var(--secondary-500);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.25s ease;
 }
 
 .footer-about a:hover {
-    color: #ffffff;
+    color: var(--text-inverse);
     text-decoration: underline;
 }
 .footer-team {
@@ -99,15 +90,15 @@
     align-items: center;
     padding: 8px 12px;
     border-radius: 12px;
-    background-color: #222830; /* Teal Green */
-    color: #fdfcfc;
+    background-color: rgba(255,255,255,0.06);
+    color: var(--text-inverse);
     font-weight: 600;
     text-decoration: none;
     transition: all 0.2s ease-in-out;
 }
 
 .team-member:hover {
-    background-color: #3b3c48;
+    background-color: rgba(255,255,255,0.1);
     transform: scale(1.05);
 }
 
