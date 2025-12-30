@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './Navbar.css';
+import ThemeToggle from '../Common/ThemeToggle';
 
 const Navbar = () => {
     const { user, isAuthenticated, isClient, isAdmin, logout } = useAuth();
@@ -34,7 +35,7 @@ const Navbar = () => {
                             <Link to="/client/profile" className="nav-link">Profile</Link>
                             <div className="nav-user">
                                 <span className="user-name">{user?.firstName}</span>
-                                <button onClick={handleLogout} className="btn btn-outline">Logout</button>
+                                <button onClick={handleLogout} className="btn btn-logout">Logout</button>
                             </div>
                         </>
                     ) : isAdmin ? (
@@ -45,12 +46,14 @@ const Navbar = () => {
                             <Link to="/admin/claims" className="nav-link">Manage Claims</Link>
                             <Link to="/admin/clients" className="nav-link">Manage Clients</Link>
                             <div className="nav-user">
+                                <span className="admin-badge">ADMIN</span>
                                 <span className="user-name">{user?.firstName}</span>
-                                <button onClick={handleLogout} className="btn btn-outline">Logout</button>
+                                <button onClick={handleLogout} className="btn btn-logout">Logout</button>
                             </div>
                         </>
                     ) : null}
                 </div>
+                <ThemeToggle />
             </div>
         </nav>
     );

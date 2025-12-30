@@ -27,13 +27,15 @@
     width: 90%;
     max-height: 90vh;
     overflow-y: auto;
+    border: 1px solid var(--border-color);
 }
 
 .claim-details {
     margin: var(--spacing-lg) 0;
     padding: var(--spacing-lg);
-    background: var(--neutral-50);
+    background: var(--bg-muted);
     border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
 }
 
 .claim-details p {
@@ -43,21 +45,21 @@
 .modal-actions {
     margin: var(--spacing-lg) 0;
     padding: var(--spacing-lg);
-    border-top: 2px solid var(--neutral-200);
-    border-bottom: 2px solid var(--neutral-200);
+    border-top: 2px solid var(--border-color);
+    border-bottom: 2px solid var(--border-color);
 }
 
 .badge-pending {
-    background: var(--warning-light);
-    color: var(--warning-dark);
+    background: var(--badge-medium-bg);
+    color: var(--badge-medium-text);
 }
 
 .badge-approved {
-    background: var(--success-light);
-    color: var(--success-dark);
+    background: var(--badge-low-bg);
+    color: var(--badge-low-text);
 }
 
 .badge-rejected {
-    background: var(--danger-light);
-    color: var(--danger-dark);
+    background: var(--badge-high-bg);
+    color: var(--badge-high-text);
 }

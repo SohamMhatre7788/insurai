@@ -14,8 +14,22 @@ const Signup = () => {
     });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [touched, setTouched] = useState({
+        firstName: false,
+        lastName: false,
+        email: false,
+        password: false,
+        confirmPassword: false,
+    });
     const { login } = useAuth();
     const navigate = useNavigate();
+
+    const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const isFirstNameValid = formData.firstName.trim().length > 0;
+    const isLastNameValid = formData.lastName.trim().length > 0;
+    const isEmailValid = validateEmail(formData.email);
+    const isPasswordValid = formData.password.length >= 6;
+    const isConfirmValid = formData.confirmPassword === formData.password && isPasswordValid;
 
     const handleChange = (e) => {
         setFormData({
@@ -23,6 +37,9 @@ const Signup = () => {
             [e.target.name]: e.target.value,
         });
         setError('');
+    };
+    const handleBlur = (e) => {
+        setTouched({ ...touched, [e.target.name]: true });
     };
 
     const handleSubmit = async (e) => {
@@ -37,6 +54,10 @@ const Signup = () => {
 
         if (formData.password.length < 6) {
             setError('Password must be at least 6 characters');
+            return;
+        }
+
+        if (!isFirstNameValid || !isLastNameValid || !isEmailValid || !isPasswordValid || !isConfirmValid) {
             return;
         }
 
@@ -94,10 +115,16 @@ const Signup = () => {
                                 name="firstName"
                                 value={formData.firstName}
                                 onChange={handleChange}
-                                className="input-field"
+                                onBlur={handleBlur}
+                                aria-invalid={touched.firstName && !isFirstNameValid}
+                                aria-describedby="firstName-error"
+                                className={`input-field ${touched.firstName ? (isFirstNameValid ? 'valid' : 'invalid') : ''}`}
                                 placeholder="John"
                                 required
                             />
+                            {touched.firstName && !isFirstNameValid && (
+                                <div id="firstName-error" className="error-message">First name is required</div>
+                            )}
                         </div>
 
                         <div className="input-group">
@@ -107,10 +134,16 @@ const Signup = () => {
                                 name="lastName"
                                 value={formData.lastName}
                                 onChange={handleChange}
-                                className="input-field"
+                                onBlur={handleBlur}
+                                aria-invalid={touched.lastName && !isLastNameValid}
+                                aria-describedby="lastName-error"
+                                className={`input-field ${touched.lastName ? (isLastNameValid ? 'valid' : 'invalid') : ''}`}
                                 placeholder="Doe"
                                 required
                             />
+                            {touched.lastName && !isLastNameValid && (
+                                <div id="lastName-error" className="error-message">Last name is required</div>
+                            )}
                         </div>
                     </div>
 
@@ -121,10 +154,16 @@ const Signup = () => {
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            className="input-field"
+                            onBlur={handleBlur}
+                            aria-invalid={touched.email && !isEmailValid}
+                            aria-describedby="email-error"
+                            className={`input-field ${touched.email ? (isEmailValid ? 'valid' : 'invalid') : ''}`}
                             placeholder="you@company.com"
                             required
                         />
+                        {touched.email && !isEmailValid && (
+                            <div id="email-error" className="error-message">Enter a valid email address</div>
+                        )}
                     </div>
 
                     <div className="input-group">
@@ -134,10 +173,16 @@ const Signup = () => {
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
-                            className="input-field"
+                            onBlur={handleBlur}
+                            aria-invalid={touched.password && !isPasswordValid}
+                            aria-describedby="password-error"
+                            className={`input-field ${touched.password ? (isPasswordValid ? 'valid' : 'invalid') : ''}`}
                             placeholder="••••••••"
                             required
                         />
+                        {touched.password && !isPasswordValid && (
+                            <div id="password-error" className="error-message">Minimum 6 characters</div>
+                        )}
                     </div>
 
                     <div className="input-group">
@@ -147,10 +192,16 @@ const Signup = () => {
                             name="confirmPassword"
                             value={formData.confirmPassword}
                             onChange={handleChange}
-                            className="input-field"
+                            onBlur={handleBlur}
+                            aria-invalid={touched.confirmPassword && !isConfirmValid}
+                            aria-describedby="confirm-error"
+                            className={`input-field ${touched.confirmPassword ? (isConfirmValid ? 'valid' : 'invalid') : ''}`}
                             placeholder="••••••••"
                             required
                         />
+                        {touched.confirmPassword && !isConfirmValid && (
+                            <div id="confirm-error" className="error-message">Passwords must match</div>
+                        )}
                     </div>
 
                     <button type="submit" className="btn btn-primary auth-btn" disabled={loading}>

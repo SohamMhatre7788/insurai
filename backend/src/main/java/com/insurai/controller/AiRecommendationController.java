@@ -1,10 +1,13 @@
 package com.insurai.controller;
 
-//import com.insurai.model.CorporateScenario;
-import com.insurai.service.*;
-
+import com.insurai.dto.PolicySummaryDTO;
+import com.insurai.security.CustomUserDetails;
+import com.insurai.service.AiDataService;
+import com.insurai.service.GeminiAiService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -12,36 +15,118 @@ import java.util.Map;
 public class AiRecommendationController {
 
     private final GeminiAiService geminiAiService;
+    private final AiDataService aiDataService;
 
-    public AiRecommendationController(GeminiAiService geminiAiService) {
+    public AiRecommendationController(GeminiAiService geminiAiService,
+                                      AiDataService aiDataService) {
         this.geminiAiService = geminiAiService;
+        this.aiDataService = aiDataService;
     }
-@PostMapping("/corporate-recommendation")
-public Map<String, String> handleAi(@RequestBody Map<String, String> request) {
+// ---------------- CLIENT AI ----------------
+ @PostMapping("/client-recommendation")
+    public Map<String, String> getClientRecommendation(
+            @RequestBody Map<String, String> request,
+            Authentication authentication) {
 
-    String userInput = request.get("input");
+        String question = request.get("input");
+        if (question == null || question.isBlank()) {
+            return Map.of("response", "Question cannot be empty.");
+        }
 
-    // ✅ 1. GREETING SHORT-CIRCUIT (NO GEMINI)
-    if (isGreeting(userInput)) {
+        // Extract clientId from CustomUserDetails
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Long clientId = userDetails.getUserId();
+
+        // Fetch client policies
+        List<PolicySummaryDTO> clientPolicies = aiDataService.getClientPolicies(clientId);
+
+        // Build prompt for AI
+        StringBuilder prompt = new StringBuilder();
+        prompt.append("You are a corporate insurance expert. Answer clearly.\n");
+
+        if (clientPolicies.isEmpty()) {
+            prompt.append("Client has no active policies.\n");
+        } else {
+            prompt.append("Client policies:\n");
+            for (PolicySummaryDTO p : clientPolicies) {
+                prompt.append("- ")
+                      .append(p.getName())
+                      .append(", Coverage: ").append(p.getCoverageAmount())
+                      .append(", Premium: ").append(p.getPremiumPerYear())
+                      .append(", Risk: ").append(p.getRiskLevel())
+                      .append(", Period: ")
+                      .append(p.getMinPeriodYears()).append("-")
+                      .append(p.getMaxPeriodYears())
+                      .append(" years\n");
+            }
+        }
+
+        prompt.append("Question: ").append(question);
+
+        // Call AI service
+        String reply = geminiAiService.generateText(prompt.toString());
+
         return Map.of(
-            "response", "Hello! How can I help you with corporate insurance today?"
+            "response",
+            reply == null || reply.isBlank()
+                    ? "AI did not return a response. Please try again."
+                    : reply
         );
     }
+    // ---------------- ADMIN AI ----------------
+    @PostMapping("/admin-recommendation")
+    public Map<String, String> getAdminRecommendation(
+            @RequestBody Map<String, String> request) {
 
-    // ✅ 2. NORMAL AI RESPONSE
-    String reply = geminiAiService.generateText(userInput);
+        String question = request.get("input");
+        List<PolicySummaryDTO> allPolicies =
+                aiDataService.getAllAdminPolicies();
 
-    return Map.of(
-        "response", reply
-    );
-}
-    private boolean isGreeting(String input) {
-        String lowered = input.toLowerCase();
-        return lowered.contains("hello") || lowered.contains("hi") || lowered.contains("greetings");
+        StringBuilder prompt = new StringBuilder();
+        prompt.append("You are helping an insurance admin.\n");
+        prompt.append("System policies:\n");
+
+        for (PolicySummaryDTO p : allPolicies) {
+            prompt.append("- ")
+                  .append(p.getName())
+                  .append(", Coverage: ").append(p.getCoverageAmount())
+                  .append(", Premium: ").append(p.getPremiumPerYear())
+                  .append(", Risk: ").append(p.getRiskLevel())
+                  .append(", Period: ")
+                  .append(p.getMinPeriodYears()).append("-")
+                  .append(p.getMaxPeriodYears())
+                  .append(" years\n");
+        }
+
+        prompt.append("Question: ").append(question);
+
+        String reply = geminiAiService.generateText(prompt.toString());
+        return Map.of("response", reply);
     }
 
+    // ---------------- GENERAL AI ----------------
+    @PostMapping("/general")
+    public Map<String, String> getGeneralRecommendation(
+            @RequestBody Map<String, String> request) {
+
+        String question = request.get("input");
+
+        if (isGreeting(question)) {
+            return Map.of(
+                "response",
+                "Hello! How can I help you with corporate insurance today?"
+            );
+        }
+
+        String reply = geminiAiService.generateText(question);
+        return Map.of("response", reply);
+    }
+
+    private boolean isGreeting(String input) {
+        if (input == null) return false;
+        String lowered = input.toLowerCase();
+        return lowered.contains("hello")
+            || lowered.contains("hi")
+            || lowered.contains("greetings");
+    }
 }
-
-    
-
-

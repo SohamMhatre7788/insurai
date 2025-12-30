@@ -11,8 +11,15 @@ const Login = () => {
     });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [touched, setTouched] = useState({ email: false, password: false });
     const { login } = useAuth();
     const navigate = useNavigate();
+
+    const validateEmail = (email) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    };
+    const isEmailValid = validateEmail(formData.email);
+    const isPasswordValid = formData.password.length >= 6;
 
     const handleChange = (e) => {
         setFormData({
@@ -21,11 +28,19 @@ const Login = () => {
         });
         setError('');
     };
+    const handleBlur = (e) => {
+        setTouched({ ...touched, [e.target.name]: true });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError('');
+
+        if (!isEmailValid || !isPasswordValid) {
+            setLoading(false);
+            return;
+        }
 
         try {
             const response = await authService.login(formData);
@@ -83,10 +98,16 @@ const Login = () => {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="input-field"
+                                    onBlur={handleBlur}
+                                    aria-invalid={touched.email && !isEmailValid}
+                                    aria-describedby="email-error"
+                                    className={`input-field ${touched.email ? (isEmailValid ? 'valid' : 'invalid') : ''}`}
                                     placeholder="you@example.com"
                                     required
                                 />
+                                {touched.email && !isEmailValid && (
+                                    <div id="email-error" className="error-message">Enter a valid email address</div>
+                                )}
                             </div>
 
                             <div className="input-group">
@@ -96,10 +117,16 @@ const Login = () => {
                                     name="password"
                                     value={formData.password}
                                     onChange={handleChange}
-                                    className="input-field"
+                                    onBlur={handleBlur}
+                                    aria-invalid={touched.password && !isPasswordValid}
+                                    aria-describedby="password-error"
+                                    className={`input-field ${touched.password ? (isPasswordValid ? 'valid' : 'invalid') : ''}`}
                                     placeholder="••••••••"
                                     required
                                 />
+                                {touched.password && !isPasswordValid && (
+                                    <div id="password-error" className="error-message">Minimum 6 characters</div>
+                                )}
                             </div>
 
                             <button type="submit" className="btn btn-primary auth-btn" disabled={loading}>

@@ -13,7 +13,7 @@
 }
 
 .dashboard-header p {
-    color: var(--neutral-600);
+    color: var(--text-secondary);
     font-size: var(--font-size-lg);
 }
 
@@ -29,7 +29,10 @@
     align-items: center;
     gap: var(--spacing-lg);
     padding: var(--spacing-xl);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: none;
 }
 
 .stat-icon {
@@ -38,12 +41,12 @@
 
 .stat-content h3 {
     font-size: var(--font-size-3xl);
-    color: var(--primary-600);
+    color: var(--text-primary);
     margin: 0;
 }
 
 .stat-content p {
-    color: var(--neutral-600);
+    color: var(--text-secondary);
     font-size: var(--font-size-sm);
     margin: 0;
 }
@@ -65,6 +68,9 @@
     cursor: pointer;
     text-decoration: none;
     color: inherit;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: none;
 }
 
 .action-icon {
@@ -73,11 +79,52 @@
 }
 
 .action-card h3 {
-    color: var(--primary-600);
+    color: var(--text-primary);
     margin-bottom: var(--spacing-sm);
 }
 
 .action-card p {
-    color: var(--neutral-600);
+    color: var(--text-secondary);
     font-size: var(--font-size-sm);
+}
+
+.action-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+}
+/* ===============================
+   AI FLOATING ACTION BUTTON
+   =============================== */
+.ai-fab {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--btn-primary-bg);
+    color: var(--text-inverse);
+    font-size: 28px;
+    border: none;
+    cursor: pointer;
+    z-index: 999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: var(--shadow-sm);
+    transition: none;
+}
+
+/* Hover Effect */
+.ai-fab:hover {
+    transform: none;
+    background: var(--btn-primary-bg);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Optional subtle click feedback */
+.ai-fab:active {
+    transform: none;
 }

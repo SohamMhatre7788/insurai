@@ -7,6 +7,7 @@ import ProtectedRoute from './components/Common/ProtectedRoute';
 import Login from './pages/Auth/Login';
 import Signup from './pages/Auth/Signup';
 
+
 // Client Pages
 import ClientDashboard from './pages/Client/ClientDashboard';
 import BuyPolicy from './pages/Client/BuyPolicy';
@@ -25,6 +26,10 @@ import './styles/index.css';
 
 const AppRoutes = () => {
     const { isAuthenticated, isClient, isAdmin } = useAuth();
+    const { user ,loading} = useAuth();
+      if (loading) {
+    return <div>Loading...</div>;
+  }
 
     return (
         <Routes>
@@ -58,14 +63,16 @@ const AppRoutes = () => {
                         </ProtectedRoute>
                     }
                 />
-                <Route
-                    path="/client/corporate-ai"
-                    element={
-                        <ProtectedRoute requiredRole="CLIENT">
-                            <CorporateAiAssistant />
-                        </ProtectedRoute>
-                    }
-                />
+              // Example in AppRoutes.jsx
+<Route
+  path="/client/corporate-ai"
+  element={
+    <ProtectedRoute requiredRole="CLIENT">
+      <CorporateAiAssistant userType="CLIENT"/>
+    </ProtectedRoute>
+  }
+/>
+
                 <Route
                     path="client/buy-policy"
                     element={
@@ -112,7 +119,7 @@ const AppRoutes = () => {
                     path="/admin/corporate-ai"
                     element={
                         <ProtectedRoute requiredRole="ADMIN">
-                            <CorporateAiAssistant />
+                            <CorporateAiAssistant userType="ADMIN" />
                         </ProtectedRoute>
                     }
                 />

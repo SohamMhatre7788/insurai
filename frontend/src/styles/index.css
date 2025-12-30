@@ -10,8 +10,8 @@ body {
     font-family: var(--font-family);
     font-size: var(--font-size-base);
     line-height: 1.6;
-    color: var(--neutral-800);
-    background: linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-50) 100%);
+    color: var(--text-primary);
+    background: var(--bg-app);
     min-height: 100vh;
 }
 
@@ -27,7 +27,7 @@ h5,
 h6 {
     font-weight: 600;
     line-height: 1.2;
-    color: var(--neutral-900);
+    color: var(--text-primary);
     margin-bottom: var(--spacing-md);
 }
 
@@ -56,13 +56,13 @@ h6 {
 }
 
 a {
-    color: var(--primary-600);
+    color: var(--primary-500);
     text-decoration: none;
-    transition: color var(--transition-fast);
+    transition: none;
 }
 
 a:hover {
-    color: var(--primary-700);
+    color: var(--primary-600);
 }
 
 button {
@@ -70,7 +70,7 @@ button {
     cursor: pointer;
     border: none;
     outline: none;
-    transition: all var(--transition-normal);
+    transition: none;
 }
 
 input,
@@ -79,6 +79,8 @@ select {
     font-family: var(--font-family);
     font-size: var(--font-size-base);
     outline: none;
+    color: var(--text-primary);
+    background: var(--bg-content);
 }
 
 /* Utility Classes */
@@ -89,21 +91,20 @@ select {
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
+    background: var(--card-bg);
     border-radius: var(--radius-lg);
     padding: var(--spacing-xl);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
 }
 
 .card-hover {
-    transition: all var(--transition-normal);
+    transition: none;
 }
 
 .card-hover:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
+    transform: none;
+    box-shadow: var(--shadow-sm);
 }
 
 .btn {
@@ -115,62 +116,62 @@ select {
     align-items: center;
     justify-content: center;
     gap: var(--spacing-sm);
-    transition: all var(--transition-normal);
+    transition: none;
     text-decoration: none;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-600), var(--primary-500));
-    color: white;
-    box-shadow: var(--shadow-md);
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, var(--primary-700), var(--primary-600));
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    background: var(--btn-primary-bg);
+    transform: none;
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, var(--secondary-600), var(--secondary-500));
-    color: white;
-    box-shadow: var(--shadow-md);
+    background: var(--btn-secondary-bg);
+    color: var(--btn-secondary-text);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary:hover {
-    background: linear-gradient(135deg, var(--secondary-700), var(--secondary-600));
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    background: var(--btn-secondary-bg);
+    transform: none;
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-outline {
     background: transparent;
-    border: 2px solid var(--primary-600);
-    color: var(--primary-600);
+    border: 2px solid var(--btn-outline-border);
+    color: var(--btn-outline-text);
 }
 
 .btn-outline:hover {
-    background: var(--primary-600);
-    color: white;
+    background: var(--btn-outline-hover-bg);
+    color: var(--btn-outline-hover-text);
 }
 
 .btn-danger {
-    background: linear-gradient(135deg, var(--danger), var(--danger-dark));
+    background: var(--danger);
     color: white;
 }
 
 .btn-danger:hover {
-    background: linear-gradient(135deg, var(--danger-dark), var(--danger));
-    transform: translateY(-2px);
+    background: var(--danger);
+    transform: none;
 }
 
 .btn-success {
-    background: linear-gradient(135deg, var(--success), var(--success-dark));
+    background: var(--success);
     color: white;
 }
 
 .btn-success:hover {
-    background: linear-gradient(135deg, var(--success-dark), var(--success));
+    background: var(--success);
 }
 
 .input-group {
@@ -181,7 +182,7 @@ select {
     display: block;
     margin-bottom: var(--spacing-sm);
     font-weight: 500;
-    color: var(--neutral-700);
+    color: var(--text-secondary);
     font-size: var(--font-size-sm);
 }
 
@@ -192,16 +193,16 @@ select {
     border-radius: var(--radius-md);
     font-size: var(--font-size-base);
     transition: all var(--transition-fast);
-    background: white;
+    background: var(--bg-content);
 }
 
 .input-field:focus {
     border-color: var(--primary-500);
-    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+    box-shadow: var(--focus-ring);
 }
 
 .input-field::placeholder {
-    color: var(--neutral-400);
+    color: var(--text-muted);
 }
 
 .error-message {
@@ -224,6 +225,7 @@ select {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    border: 1px solid var(--border-color);
 }
 
 .badge-success {
@@ -242,8 +244,8 @@ select {
 }
 
 .badge-info {
-    background: var(--primary-100);
-    color: var(--primary-700);
+    background: var(--badge-info-bg);
+    color: var(--badge-info-text);
 }
 
 .loading {
@@ -259,27 +261,40 @@ select {
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+    animation: none;
 }
 
 .fade-in {
-    animation: fadeIn 0.5s ease-in;
+    animation: none;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Accessibility helpers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Tables polish */
+.policies-table {
+    background: var(--bg-content);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+.policies-table thead {
+    background: var(--table-header-bg);
+}
+.policies-table th, .policies-table td {
+    border-bottom: 1px solid var(--border-color);
+}
+.policies-table tbody tr:hover {
+    background: var(--table-row-hover);
 }

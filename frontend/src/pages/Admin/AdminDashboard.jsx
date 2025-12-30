@@ -102,38 +102,14 @@ const navigate = useNavigate();
                     </Link>
                 </div>
             </div>
-             <button
-      onClick={() => navigate("/admin/corporate-ai")}
-      style={{
-        position: "fixed",
-        bottom: "25px",
-        right: "25px",
-        width: "64px",
-        height: "64px",
-        borderRadius: "50%",
-        background: "linear-gradient(135deg, #2563eb, #1e40af)",
-        color: "#fff",
-        fontSize: "28px",
-        border: "none",
-        cursor: "pointer",
-        boxShadow: "0 12px 25px rgba(37,99,235,0.4)",
-        zIndex: 999,
-        transition: "transform 0.2s ease, box-shadow 0.2s ease"
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "scale(1.1)";
-        e.currentTarget.style.boxShadow =
-          "0 16px 35px rgba(37,99,235,0.6)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "scale(1)";
-        e.currentTarget.style.boxShadow =
-          "0 12px 25px rgba(37,99,235,0.4)";
-      }}
-      title="Corporate AI Assistant"
-    >
-      🤖
-    </button>
+  <button
+  className="ai-fab"
+  onClick={() => navigate("/admin/corporate-ai")}
+  title="Corporate AI Assistant"
+>
+  🤖
+</button>
+
         </div>
     );
 };

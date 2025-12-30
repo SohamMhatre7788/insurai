@@ -1,17 +1,17 @@
 .navbar {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: var(--shadow-md);
+    background: var(--navbar-bg);
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid var(--neutral-200);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: none;
 }
 
+/* Navbar container */
 .navbar-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 var(--spacing-lg);
+    padding: 0 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -21,60 +21,154 @@
 .navbar-logo {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
-    font-size: var(--font-size-xl);
+    gap: 10px;
+    font-size: 20px;
     font-weight: 700;
-    color: var(--primary-600);
+    color: var(--text-inverse);
     text-decoration: none;
-    transition: all var(--transition-normal);
+    letter-spacing: 0.3px;
+    transition: none;
 }
 
 .navbar-logo:hover {
-    transform: scale(1.05);
-    color: var(--primary-700);
+    opacity: 1;
 }
 
 .logo-icon {
-    font-size: var(--font-size-2xl);
+    font-size: 24px;
+    color: var(--success);
 }
 
 .logo-text {
-    background: linear-gradient(135deg, var(--primary-600), var(--secondary-600));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-inverse);
 }
 
 .navbar-links {
     display: flex;
     align-items: center;
-    gap: var(--spacing-lg);
+    gap: 20px;
 }
 
 .nav-link {
-    color: var(--neutral-700);
+    color: var(--text-inverse);
     font-weight: 500;
-    font-size: var(--font-size-sm);
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-md);
-    transition: all var(--transition-fast);
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 10px;
     text-decoration: none;
+    transition: none;
 }
 
 .nav-link:hover {
-    color: var(--primary-600);
-    background: var(--primary-50);
+    color: var(--text-inverse);
+    background: rgba(255, 255, 255, 0.06);
 }
 
 .nav-user {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
-    padding-left: var(--spacing-lg);
-    border-left: 2px solid var(--neutral-200);
+    gap: 14px;
+    padding-left: 20px;
+    border-left: 1px solid var(--border-color);
 }
 
 .user-name {
     font-weight: 600;
-    color: var(--neutral-800);
+    color: var(--secondary-500);
+}
+
+/* Admin Badge */
+.admin-badge {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-inverse);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+/* Logout Button */
+.btn-logout {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--text-inverse);
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--text-inverse);
+    transform: translateY(-1px);
+}
+
+.btn-logout:active {
+    transform: translateY(0);
+}
+
+/* Theme toggle */
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-inverse);
+    transition: none;
+}
+.theme-toggle:hover {
+    transform: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+body[data-theme="dark"] .theme-toggle:hover {
+    background: transparent;
+    box-shadow: none;
+    border-color: var(--border-color);
+}
+
+/* Tooltip styling */
+.theme-name-tooltip {
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-5px);
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: none;
+    pointer-events: none;
+    z-index: 1001;
+}
+
+.theme-toggle {
+    position: relative; /* Ensure relative positioning for tooltip */
+}
+
+.theme-toggle:hover .theme-name-tooltip {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+body[data-theme="dark"] .theme-name-tooltip {
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
 }
