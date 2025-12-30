@@ -1,0 +1,194 @@
+.manage-claims-container {
+    padding: 2rem;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+
+    &-primary {
+        background: var(--primary);
+        color: white;
+    }
+
+    &-outline {
+        background: transparent;
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
+
+        &:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+    }
+}
+
+.claims-table-container {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.policies-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+        background: var(--bg-muted);
+        font-weight: 600;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    td {
+        color: var(--text-primary);
+    }
+}
+
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+
+    &-pending {
+        background: rgba(var(--warning-rgb), 0.15);
+        color: var(--warning);
+    }
+
+    &-approved {
+        background: rgba(var(--success-rgb), 0.15);
+        color: var(--success);
+    }
+
+    &-rejected {
+        background: rgba(var(--danger-rgb), 0.15);
+        color: var(--danger);
+    }
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: var(--bg-card);
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    position: relative;
+    box-shadow: var(--shadow-lg);
+}
+
+.claim-details {
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: var(--bg-muted);
+    border-radius: var(--radius-md);
+
+    p {
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+
+        strong {
+            color: var(--text-secondary);
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+.modal-actions {
+    margin: 1.5rem 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .input-label {
+        font-weight: 500;
+        color: var(--text-secondary);
+    }
+
+    .input-field {
+        padding: 0.75rem;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-color);
+        background: var(--bg-input);
+        color: var(--text-primary);
+
+        &:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+    }
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.error-message {
+    background-color: rgba(var(--danger-rgb), 0.1);
+    color: var(--danger);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(var(--danger-rgb), 0.2);
+    margin-bottom: 2rem;
+    text-align: center;
+}
