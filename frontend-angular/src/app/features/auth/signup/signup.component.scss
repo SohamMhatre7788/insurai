@@ -1,4 +1,4 @@
-@import '../../../../styles/variables';
+@use '../../../../variables' as *;
 
 .auth-container {
     min-height: calc(100vh - 70px);
@@ -20,7 +20,7 @@
     margin-bottom: $spacing-xl;
 
     h1 {
-        background: linear-gradient(135deg, $primary-600, $secondary-600);
+        background: linear-gradient(135deg, $primary-600, $neutral-600);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -29,7 +29,7 @@
 
     p {
         color: var(--text-secondary);
-        font-size: $font-size-base;
+        font-size: $font-base;
     }
 }
 

@@ -39,7 +39,13 @@ export interface Claim {
     description: string;
     status: 'PENDING' | 'APPROVED' | 'REJECTED';
     rejectionReason?: string;
-    claimDate: string;
+    createdAt?: string;
+    claimDate?: string;
+    // Enhanced fields for Admin UI
+    companyName?: string;
+    policyName?: string;
+    maxCoverageForPolicy?: number;
+    supportingDocumentUrls?: string[];
 }
 
 export interface CreateClaimRequest {
