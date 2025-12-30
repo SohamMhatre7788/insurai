@@ -1,0 +1,113 @@
+@import '../../../styles/variables';
+
+.navbar {
+    background: var(--navbar-bg);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: none;
+}
+
+.navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-inverse);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: none;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.logo-icon {
+    font-size: 24px;
+    color: $success;
+}
+
+.logo-text {
+    color: var(--text-inverse);
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-link {
+    color: var(--text-inverse);
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: none;
+
+    &:hover {
+        color: var(--text-inverse);
+        background: rgba(255, 255, 255, 0.06);
+    }
+}
+
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-left: 20px;
+    border-left: 1px solid var(--border-color);
+}
+
+.user-name {
+    font-weight: 600;
+    color: $secondary-500;
+}
+
+.admin-badge {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-inverse);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.btn-logout {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--text-inverse);
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: var(--text-inverse);
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
