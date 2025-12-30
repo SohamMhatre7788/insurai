@@ -25,6 +25,9 @@ const ThemeToggle = () => {
       className="theme-toggle"
     >
       {theme === 'dark' ? '🌙' : '🌞'}
+      <span className="theme-name-tooltip">
+        {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
+      </span>
     </button>
   );
 };
