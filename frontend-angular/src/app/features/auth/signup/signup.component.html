@@ -1,0 +1,96 @@
+<div class="auth-container">
+    <div class="auth-card card">
+        <div class="rounded-2xl bg-gradient-to-br from-indigo-500 via-indigo-600 to-blue-600 p-8 text-white">
+            <p class="text-xs uppercase tracking-[0.3em] text-indigo-200">
+                InsurAI
+            </p>
+            <h2 class="mt-6 text-3xl font-semibold leading-tight">
+                Corporate Policy Automation System
+            </h2>
+            <p class="mt-4 text-sm text-indigo-100">
+                Securely create, validate, and manage AI-assisted policies in one
+                corporate-grade workspace.
+            </p>
+            <ul class="mt-10 space-y-4 text-sm text-indigo-50">
+                <li>AI-generated drafts tailored for enterprises.</li>
+                <li>Compliance insights and renewal tracking.</li>
+                <li>Encrypted JWT authentication, Bcrypt passwords and secure uploads.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="auth-card card fade-in">
+        <div class="auth-header">
+            <h1>Create Account</h1>
+            <p>Join Insurai and protect your business</p>
+        </div>
+
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="auth-form">
+            <div *ngIf="error" class="error-message">{{ error }}</div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label class="input-label">First Name</label>
+                    <input type="text" formControlName="firstName"
+                        [class.invalid]="firstName?.invalid && firstName?.touched"
+                        [class.valid]="firstName?.valid && firstName?.touched" class="input-field" placeholder="John" />
+                    <div *ngIf="firstName?.invalid && firstName?.touched" class="error-message">
+                        First name is required
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Last Name</label>
+                    <input type="text" formControlName="lastName"
+                        [class.invalid]="lastName?.invalid && lastName?.touched"
+                        [class.valid]="lastName?.valid && lastName?.touched" class="input-field" placeholder="Doe" />
+                    <div *ngIf="lastName?.invalid && lastName?.touched" class="error-message">
+                        Last name is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Email</label>
+                <input type="email" formControlName="email" [class.invalid]="email?.invalid && email?.touched"
+                    [class.valid]="email?.valid && email?.touched" class="input-field" placeholder="you@company.com" />
+                <div *ngIf="email?.invalid && email?.touched" class="error-message">
+                    <span *ngIf="email?.errors?.['required']">Email is required</span>
+                    <span *ngIf="email?.errors?.['email']">Enter a valid email address</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Password</label>
+                <input type="password" formControlName="password"
+                    [class.invalid]="password?.invalid && password?.touched"
+                    [class.valid]="password?.valid && password?.touched" class="input-field" placeholder="••••••••" />
+                <div *ngIf="password?.invalid && password?.touched" class="error-message">
+                    <span *ngIf="password?.errors?.['required']">Password is required</span>
+                    <span *ngIf="password?.errors?.['minlength']">Minimum 6 characters</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Confirm Password</label>
+                <input type="password" formControlName="confirmPassword"
+                    [class.invalid]="(confirmPassword?.invalid || signupForm.errors?.['passwordMismatch']) && confirmPassword?.touched"
+                    [class.valid]="confirmPassword?.valid && !signupForm.errors?.['passwordMismatch'] && confirmPassword?.touched"
+                    class="input-field" placeholder="••••••••" />
+                <div *ngIf="confirmPassword?.touched && signupForm.errors?.['passwordMismatch']" class="error-message">
+                    Passwords must match
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary auth-btn" [disabled]="loading">
+                {{ loading ? 'Creating account...' : 'Sign Up' }}
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            <p>
+                Already have an account? <a routerLink="/login">Sign in</a>
+            </p>
+        </div>
+    </div>
+</div>

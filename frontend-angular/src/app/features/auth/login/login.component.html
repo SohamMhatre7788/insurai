@@ -1,0 +1,63 @@
+<div class="auth-container">
+    <div class="auth-card card">
+        <div class="rounded-2xl bg-gradient-to-br from-indigo-500 via-indigo-600 to-blue-600 p-8 text-white">
+            <p class="text-xs uppercase tracking-[0.3em] text-indigo-200">
+                InsurAI
+            </p>
+            <h2 class="mt-6 text-3xl font-semibold leading-tight">
+                Corporate Policy Automation System
+            </h2>
+            <p class="mt-4 text-sm text-indigo-100">
+                Securely create, validate, and manage AI-assisted policies in one
+                corporate-grade workspace.
+            </p>
+            <ul class="mt-10 space-y-4 text-sm text-indigo-50">
+                <li>AI-generated drafts tailored for enterprises.</li>
+                <li>Compliance insights and renewal tracking.</li>
+                <li>Encrypted JWT authentication, Bcrypt passwords and secure uploads.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="auth-card card">
+        <div class="auth-header">
+            <h1>Welcome Back</h1>
+            <p>Sign in to your Insurai account</p>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+            <div *ngIf="error" class="error-message">{{ error }}</div>
+
+            <div class="input-group">
+                <label class="input-label">Email</label>
+                <input type="email" formControlName="email" [class.invalid]="email?.invalid && email?.touched"
+                    [class.valid]="email?.valid && email?.touched" class="input-field" placeholder="you@example.com" />
+                <div *ngIf="email?.invalid && email?.touched" class="error-message">
+                    <span *ngIf="email?.errors?.['required']">Email is required</span>
+                    <span *ngIf="email?.errors?.['email']">Enter a valid email address</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Password</label>
+                <input type="password" formControlName="password"
+                    [class.invalid]="password?.invalid && password?.touched"
+                    [class.valid]="password?.valid && password?.touched" class="input-field" placeholder="••••••••" />
+                <div *ngIf="password?.invalid && password?.touched" class="error-message">
+                    <span *ngIf="password?.errors?.['required']">Password is required</span>
+                    <span *ngIf="password?.errors?.['minlength']">Minimum 6 characters</span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary auth-btn" [disabled]="loading">
+                {{ loading ? 'Signing in...' : 'Sign In' }}
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            <p>
+                Don't have an account? <a routerLink="/signup">Sign up</a>
+            </p>
+        </div>
+    </div>
+</div>

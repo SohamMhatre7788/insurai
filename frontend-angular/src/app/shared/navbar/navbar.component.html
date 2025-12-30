@@ -1,0 +1,42 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <a routerLink="/" class="navbar-logo">
+      <span class="logo-icon">🛡️</span>
+      <span class="logo-text">Insurai</span>
+    </a>
+
+    <div class="navbar-links">
+      <ng-container *ngIf="!(isAuthenticated$ | async)">
+        <a routerLink="/login" class="nav-link">Login</a>
+        <a routerLink="/signup" class="nav-link btn-primary">Sign Up</a>
+      </ng-container>
+
+      <ng-container *ngIf="isClient">
+        <a routerLink="/client" class="nav-link">Dashboard</a>
+        <a routerLink="/client/buy-policy" class="nav-link">Buy Policy</a>
+        <a routerLink="/client/my-policies" class="nav-link">My Policies</a>
+        <a routerLink="/client/claim" class="nav-link">File Claim</a>
+        <a routerLink="/client/profile" class="nav-link">Profile</a>
+        <div class="nav-user">
+          <span class="user-name">{{ (user$ | async)?.firstName }}</span>
+          <button (click)="logout()" class="btn btn-logout">Logout</button>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="isAdmin">
+        <a routerLink="/admin" class="nav-link">Dashboard</a>
+        <a routerLink="/admin/create-policy" class="nav-link">Create Policy</a>
+        <a routerLink="/admin/policies" class="nav-link">Manage Policies</a>
+        <a routerLink="/admin/claims" class="nav-link">Manage Claims</a>
+        <a routerLink="/admin/clients" class="nav-link">Manage Clients</a>
+        <div class="nav-user">
+          <span class="admin-badge">ADMIN</span>
+          <span class="user-name">{{ (user$ | async)?.firstName }}</span>
+          <button (click)="logout()" class="btn btn-logout">Logout</button>
+        </div>
+      </ng-container>
+    </div>
+    
+    <app-theme-toggle></app-theme-toggle>
+  </div>
+</nav>

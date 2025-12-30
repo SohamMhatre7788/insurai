@@ -99,7 +99,7 @@ const BuyPolicy = () => {
                                     {policy.riskLevel}
                                 </span>
                             </div>
-                            <p className="policy-description">{policy.description}</p>
+                            
                             <div className="policy-details">
                                 <div className="detail-item">
                                     <span className="detail-label">Coverage:</span>

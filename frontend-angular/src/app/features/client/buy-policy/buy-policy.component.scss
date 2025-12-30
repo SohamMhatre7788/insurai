@@ -1,0 +1,114 @@
+@import '../../../../styles/variables';
+
+.buy-policy-container {
+    padding: $spacing-2xl $spacing-lg;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: $spacing-2xl;
+}
+
+.policies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: $spacing-xl;
+}
+
+.policy-card {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    border: 1px solid var(--border-color);
+    transition: transform $transition-fast, box-shadow $transition-fast;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+    }
+}
+
+.policy-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.policy-details {
+    margin: $spacing-md 0;
+    padding: $spacing-md;
+    background: var(--bg-muted);
+    border-radius: $radius-md;
+    border: 1px solid var(--border-color);
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $spacing-sm;
+}
+
+.detail-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.detail-value {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.purchase-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.selected-policy-summary {
+    margin-bottom: $spacing-xl;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.premium-summary {
+    padding: $spacing-lg;
+    background: var(--bg-muted);
+    border-radius: $radius-md;
+    text-align: center;
+    margin: $spacing-lg 0;
+    border: 1px solid var(--border-color);
+
+    h4 {
+        color: $primary-700;
+        font-size: $font-size-xl;
+    }
+}
+
+.form-actions {
+    display: flex;
+    gap: $spacing-md;
+    justify-content: space-between;
+}
+
+.success-container {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-card {
+    text-align: center;
+    max-width: 500px;
+}
+
+.success-icon {
+    font-size: 5rem;
+    margin-bottom: $spacing-lg;
+}
+
+.success-actions {
+    display: flex;
+    gap: $spacing-md;
+    justify-content: center;
+    margin-top: $spacing-xl;
+}

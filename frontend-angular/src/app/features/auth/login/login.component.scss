@@ -1,0 +1,165 @@
+@import '../../../../styles/variables';
+
+.auth-container {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-2xl;
+    gap: $spacing-2xl;
+}
+
+.auth-card {
+    max-width: 500px;
+    width: 100%;
+    border: 1px solid var(--border-color);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+
+    h1 {
+        background: linear-gradient(135deg, $primary-600, $secondary-600);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: $spacing-sm;
+    }
+
+    p {
+        color: var(--text-secondary);
+        font-size: $font-size-base;
+    }
+}
+
+.auth-form {
+    margin-bottom: $spacing-lg;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-md;
+}
+
+.auth-btn {
+    width: 100%;
+    margin-top: $spacing-md;
+}
+
+.auth-footer {
+    text-align: center;
+    padding-top: $spacing-lg;
+    border-top: 2px solid var(--border-color);
+
+    p {
+        color: var(--text-secondary);
+    }
+
+    a {
+        color: $primary-600;
+        font-weight: 600;
+
+        &:hover {
+            color: $primary-700;
+        }
+    }
+}
+
+/* Tailwind gradient classes used in template */
+.rounded-2xl {
+    border-radius: 1rem;
+}
+
+.bg-gradient-to-br {
+    background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
+}
+
+.from-indigo-500 {
+    --tw-gradient-from: #6366f1;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(99, 102, 241, 0));
+}
+
+.via-indigo-600 {
+    --tw-gradient-stops: var(--tw-gradient-from), #4f46e5, var(--tw-gradient-to, rgba(79, 70, 229, 0));
+}
+
+.to-blue-600 {
+    --tw-gradient-to: #2563eb;
+}
+
+.p-8 {
+    padding: 2rem;
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.tracking-\[0\.3em\] {
+    letter-spacing: 0.3em;
+}
+
+.text-indigo-200 {
+    color: #c7d2fe;
+}
+
+.mt-6 {
+    margin-top: 1.5rem;
+}
+
+.text-3xl {
+    font-size: 1.875rem;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.leading-tight {
+    line-height: 1.25;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.text-indigo-100 {
+    color: #e0e7ff;
+}
+
+.mt-10 {
+    margin-top: 2.5rem;
+}
+
+.space-y-4>*+* {
+    margin-top: 1rem;
+}
+
+.text-indigo-50 {
+    color: #eef2ff;
+}
+
+/* Field validation states */
+.input-field.invalid {
+    border-color: $danger;
+    box-shadow: 0 0 0 3px rgba(184, 74, 74, 0.15);
+}
+
+.input-field.valid {
+    border-color: $success;
+    box-shadow: 0 0 0 3px rgba(61, 161, 153, 0.15);
+}

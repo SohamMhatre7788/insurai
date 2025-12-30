@@ -1,0 +1,90 @@
+<div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+</div>
+
+<div *ngIf="success" class="success-container container">
+    <div class="success-card card fade-in">
+        <div class="success-icon">✅</div>
+        <h1>Thank You for Purchasing Our Policy!</h1>
+        <p>Your policy has been successfully activated.</p>
+        <div class="success-actions">
+            <button (click)="goToDashboard()" class="btn btn-primary">
+                Go to Dashboard
+            </button>
+            <button (click)="viewMyPolicies()" class="btn btn-secondary">
+                View My Policies
+            </button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!loading && !success" class="buy-policy-container container">
+    <h1 class="page-title fade-in">Buy Insurance Policy</h1>
+
+    <div *ngIf="!selectedPolicy" class="policies-grid fade-in">
+        <div *ngFor="let policy of policies" class="policy-card card card-hover">
+            <div class="policy-header">
+                <h3>{{ policy.name }}</h3>
+                <span class="badge badge-info">{{ policy.riskLevel }}</span>
+            </div>
+
+            <div class="policy-details">
+                <div class="detail-item">
+                    <span class="detail-label">Coverage:</span>
+                    <span class="detail-value">{{ policy.coverageAmount | number }} Rupees</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Premium/Year:</span>
+                    <span class="detail-value">{{ policy.premiumPerYear | number }} Rupees</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Period:</span>
+                    <span class="detail-value">{{ policy.minPeriodYears }}-{{ policy.maxPeriodYears }} years</span>
+                </div>
+            </div>
+            <button (click)="selectPolicy(policy)" class="btn btn-primary">
+                Select Policy
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="selectedPolicy" class="purchase-form-container fade-in">
+        <div class="selected-policy-summary card">
+            <h3>Selected Policy: {{ selectedPolicy.name }}</h3>
+            <p>Individual Coverage: {{ selectedPolicy.coverageAmount | number }} Rupees</p>
+        </div>
+
+        <form [formGroup]="purchaseForm" (ngSubmit)="onSubmit()" class="purchase-form card">
+            <div *ngIf="error" class="error-message">{{ error }}</div>
+
+            <div class="input-group">
+                <label class="input-label">Company Name</label>
+                <input type="text" formControlName="companyName" class="input-field" />
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Number of Employees</label>
+                <input type="number" formControlName="numberOfEmployees" class="input-field" min="1" />
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Policy Period (Years)</label>
+                <input type="number" formControlName="policyPeriodYears" class="input-field"
+                    [min]="selectedPolicy.minPeriodYears || 1" [max]="selectedPolicy.maxPeriodYears || 10" />
+            </div>
+
+            <div class="premium-summary">
+                <h4>Total Premium(Per Month): {{ calculatePremium() | number }} Rupees</h4>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" (click)="backToPolicies()" class="btn btn-outline">
+                    Back to Policies
+                </button>
+                <button type="submit" class="btn btn-primary" [disabled]="purchasing || purchaseForm.invalid">
+                    {{ purchasing ? 'Processing...' : 'Purchase Policy' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-about">
+            <strong>About Us</strong>
+            <p>
+                Welcome to our team project! This project is part of Infosys Springboard Virtual Internship 6.0.
+            </p>
+
+            <div class="footer-team">
+                <a *ngFor="let member of teamMembers" [href]="member.link" target="_blank" rel="noreferrer"
+                    class="team-member">
+                    {{ member.name }}
+                    <span class="linkedin-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16"
+                            fill="#0A66C2">
+                            <path
+                                d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.57 0 54S24.09 0 53.79 0s53.79 24.57 53.79 54-24.09 54-53.79 54zM447.9 448h-92.68V302.4c0-34.7-12.42-58.3-43.48-58.3-23.73 0-37.85 16-44.06 31.4-2.26 5.5-2.82 13.1-2.82 20.7V448h-92.78s1.22-241.8 0-266.1h92.78v37.7c-.18.3-.43.6-.61.9h.61v-.9c12.3-19 34.33-46.1 83.5-46.1 60.9 0 106.6 39.7 106.6 125.1V448z" />
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
