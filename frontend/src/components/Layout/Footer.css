@@ -61,7 +61,7 @@
     line-height: 1.8;
     max-width: 720px;
     margin: auto;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* Footer links */
