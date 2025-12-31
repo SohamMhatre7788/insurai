@@ -1,0 +1,33 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.profile-container {
+  width: 100%;
+  max-width: 900px;
+}
+
+.auth-card {
+  margin-bottom: 2rem;
+}
+
+.input-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.input-group {
+  flex: 1;
+}
+
+.error-message {
+  color: #d32f2f;
+  margin-bottom: 1rem;
+}
+
+.success-message {
+  color: #2e7d32;
+  margin-bottom: 1rem;
+}
