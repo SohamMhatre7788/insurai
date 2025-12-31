@@ -1,0 +1,79 @@
+<div class="auth-container">
+
+
+  <div class="profile-container">
+
+    <!-- ================= PROFILE UPDATE ================= -->
+    <div class="auth-card card fade-in">
+      <h2>Update Profile</h2>
+
+      <form [formGroup]="profileForm" (ngSubmit)="onProfileSubmit()" class="auth-form">
+
+        <div *ngIf="profileSuccess" class="success-message">
+          {{ profileSuccess }}
+        </div>
+
+        <div *ngIf="profileError" class="error-message">
+          {{ profileError }}
+        </div>
+
+        <div class="input-row">
+          <div class="input-group">
+            <label class="input-label">First Name</label>
+            <input type="text" formControlName="firstName" class="input-field" />
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">Last Name</label>
+            <input type="text" formControlName="lastName" class="input-field" />
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Email</label>
+          <input type="email" formControlName="email" class="input-field" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          Update Profile
+        </button>
+      </form>
+    </div>
+
+    <!-- ================= PASSWORD CHANGE ================= -->
+    <div class="auth-card card fade-in">
+      <h2>Change Password</h2>
+
+      <form [formGroup]="passwordForm" (ngSubmit)="onPasswordSubmit()" class="auth-form">
+
+        <div *ngIf="passwordSuccess" class="success-message">
+          {{ passwordSuccess }}
+        </div>
+
+        <div *ngIf="passwordError" class="error-message">
+          {{ passwordError }}
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Current Password</label>
+          <input type="password" formControlName="currentPassword" class="input-field" />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">New Password</label>
+          <input type="password" formControlName="newPassword" class="input-field" />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Confirm New Password</label>
+          <input type="password" formControlName="confirmNewPassword" class="input-field" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          Change Password
+        </button>
+      </form>
+    </div>
+
+  </div>
+</div>

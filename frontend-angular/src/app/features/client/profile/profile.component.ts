@@ -5,91 +5,162 @@ import { UserService } from '../../../core/services/user.service';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
-    selector: 'app-profile',
-    standalone: true,
-    imports: [CommonModule, ReactiveFormsModule],
-    template: `
-    <div class="container" style="padding: 2rem; max-width: 600px; margin: 0 auto;">
-      <h1>Profile Settings</h1>
-      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="card" style="padding: 2rem; margin-top: 2rem;">
-        <div *ngIf="error" class="error-message">{{ error }}</div>
-        <div *ngIf="success" class="success-message">Profile updated successfully!</div>
-        
-        <div class="input-group">
-          <label class="input-label">First Name</label>
-          <input type="text" formControlName="firstName" class="input-field" />
-        </div>
-
-        <div class="input-group">
-          <label class="input-label">Last Name</label>
-          <input type="text" formControlName="lastName" class="input-field" />
-        </div>
-
-        <div class="input-group">
-          <label class="input-label">Phone Number</label>
-          <input type="text" formControlName="phoneNumber" class="input-field" />
-        </div>
-
-        <div class="input-group">
-          <label class="input-label">Address</label>
-          <textarea formControlName="address" class="input-field" rows="3"></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary" [disabled]="loading || profileForm.invalid">
-          {{ loading ? 'Updating...' : 'Update Profile' }}
-        </button>
-      </form>
-    </div>
-  `,
-    styles: []
+  selector: 'app-profile',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-    profileForm: FormGroup;
-    loading = false;
-    error = '';
-    success = false;
 
-    constructor(
-        private fb: FormBuilder,
-        private userService: UserService,
-        private authService: AuthService
-    ) {
-        this.profileForm = this.fb.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            phoneNumber: ['', Validators.required],
-            address: ['', Validators.required]
+  userId!: number;
+
+  // ===== FORMS =====
+  profileForm!: FormGroup;
+  passwordForm!: FormGroup;
+
+  // ===== STATE =====
+  loading = true;
+  profileSuccess = '';
+  profileError = '';
+  passwordSuccess = '';
+  passwordError = '';
+
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private authService: AuthService
+  ) {}
+
+ngOnInit(): void {
+  this.initForms();
+
+  // 🔥 DIRECT BACKEND CALL – single source of truth
+  this.userService.getCurrentUser().subscribe({
+    next: (user: any) => {
+      console.log('BACKEND USER =>', user);
+
+      this.userId = Number(user.id);
+
+      this.profileForm.patchValue({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
+      });
+
+      this.loading = false;
+    },
+    error: (err) => {
+      console.error('CURRENT USER ERROR', err);
+      this.profileError = 'Failed to load user profile';
+      this.loading = false;
+    }
+  });
+}
+
+
+  // =========================
+  // INIT FORMS
+  // =========================
+  initForms(): void {
+    this.profileForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
+    });
+
+    this.passwordForm = this.fb.group({
+      currentPassword: ['', Validators.required],
+      newPassword: ['', Validators.required],
+      confirmNewPassword: ['', Validators.required]
+    });
+  }
+
+  // =========================
+  // FETCH PROFILE
+  // =========================
+fetchProfile(): void {
+  this.userService.getProfile(this.userId).subscribe({
+    next: (data: any) => {
+      this.profileForm.patchValue({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email
+      });
+      this.loading = false;
+    },
+    error: (err) => {
+      console.error('PROFILE LOAD ERROR', err);
+      this.profileError = 'Failed to load profile';
+      this.loading = false;
+    }
+  });
+}
+
+
+
+
+
+  // =========================
+  // UPDATE PROFILE
+  // =========================
+onProfileSubmit(): void {
+  if (this.profileForm.invalid) return;
+
+  console.log('UPDATING PROFILE FOR USER ID =>', this.userId);
+
+  this.userService
+    .updateProfile(this.userId, this.profileForm.value)
+    .subscribe({
+      next: (updatedUser: any) => {
+        const existingUser = this.authService.getUser();
+
+        this.authService.setUser({
+          ...existingUser,
+          firstName: updatedUser.firstName,
+          lastName: updatedUser.lastName,
+          email: updatedUser.email
         });
-    }
 
-    ngOnInit(): void {
-        const user = this.authService.getUser();
-        if (user) {
-            this.userService.getProfile(user.id).subscribe({
-                next: (profile) => {
-                    this.profileForm.patchValue(profile);
-                }
-            });
-        }
-    }
+        this.profileSuccess = 'Profile updated successfully!';
+      },
+      error: (err) => {
+        console.error('UPDATE ERROR', err);
+        this.profileError = err.error?.error || 'Profile update failed';
+      }
+    });
+}
 
-    onSubmit(): void {
-        if (this.profileForm.invalid) return;
-        this.loading = true;
-        this.error = '';
 
-        const user = this.authService.getUser();
-        if (!user) return;
 
-        this.userService.updateProfile(user.id, this.profileForm.value).subscribe({
-            next: () => {
-                this.success = true;
-                this.loading = false;
-            },
-            error: (err) => {
-                this.error = err.error?.error || 'Failed to update profile';
-                this.loading = false;
-            }
-        });
-    }
+  // =========================
+  // CHANGE PASSWORD
+  // =========================
+ onPasswordSubmit(): void {
+  if (this.passwordForm.invalid) return;
+
+  const { newPassword, confirmNewPassword } = this.passwordForm.value;
+
+  if (newPassword !== confirmNewPassword) {
+    this.passwordError = 'New passwords do not match';
+    return;
+  }
+
+  console.log('CHANGING PASSWORD FOR USER ID =>', this.userId);
+
+  this.userService
+    .changePassword(this.userId, this.passwordForm.value)
+    .subscribe({
+      next: () => {
+        this.passwordSuccess = 'Password changed successfully!';
+        this.passwordForm.reset();
+      },
+      error: (err) => {
+        console.error('PASSWORD ERROR', err);
+        this.passwordError = err.error?.error || 'Password change failed';
+      }
+    });
+}
+
+
 }
