@@ -3,6 +3,7 @@ package com.insurai.controller;
 import com.insurai.dto.user.ChangePasswordRequest;
 import com.insurai.dto.user.UpdateProfileRequest;
 import com.insurai.dto.user.UserProfileResponse;
+import com.insurai.security.CustomUserDetails;
 import com.insurai.security.JwtUtil;
 import com.insurai.service.UserService;
 
@@ -20,25 +21,32 @@ public class ClientController {
 
     private final UserService userService;
 
-    @GetMapping("/me")
-    public ResponseEntity<UserProfileResponse> getProfile(
-            @RequestParam Long userId) {
+   @GetMapping("/me")
+    public ResponseEntity<UserProfileResponse> getProfile(Authentication authentication) {
+
+        Long userId = ((CustomUserDetails) authentication.getPrincipal()).getUserId();
 
         return ResponseEntity.ok(userService.getUserProfile(userId));
     }
 
-    @PutMapping("/me")
+   @PutMapping("/me")
     public ResponseEntity<UserProfileResponse> updateProfile(
             @Valid @RequestBody UpdateProfileRequest request,
-            @RequestParam Long userId) {
+            Authentication authentication) {
+
+        Long userId = ((CustomUserDetails) authentication.getPrincipal()).getUserId();
 
         return ResponseEntity.ok(userService.updateProfile(userId, request));
     }
 
+  
+    // ✅ CHANGE PASSWORD
     @PutMapping("/me/password")
     public ResponseEntity<Void> changePassword(
             @Valid @RequestBody ChangePasswordRequest request,
-            @RequestParam Long userId) {
+            Authentication authentication) {
+
+        Long userId = ((CustomUserDetails) authentication.getPrincipal()).getUserId();
 
         userService.changePassword(userId, request);
         return ResponseEntity.ok().build();
