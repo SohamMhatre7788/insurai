@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AdminService } from '../../../core/services/admin.service';
 
 @Component({
@@ -11,12 +11,12 @@ import { AdminService } from '../../../core/services/admin.service';
   template: `
     <div class="create-policy-container container">
       <div class="page-header">
-        <h1 class="page-title">Create New Policy</h1>
+      <h1 class="page-title">{{ isEditMode ? 'Edit Policy' : 'Create New Policy' }}</h1>
       </div>
 
       <form [formGroup]="policyForm" (ngSubmit)="onSubmit()" class="form-card fade-in">
         <div *ngIf="error" class="error-message">{{ error }}</div>
-        <div *ngIf="success" class="success-message">Policy created successfully!</div>
+        <div *ngIf="success" class="success-message">Policy {{ isEditMode ? 'updated' : 'created' }} successfully!</div>
         
         <div class="input-group">
           <label class="input-label">Policy Name</label>
@@ -69,7 +69,7 @@ import { AdminService } from '../../../core/services/admin.service';
         <div class="form-actions">
             <button type="button" class="btn btn-outline" (click)="cancel()">Cancel</button>
             <button type="submit" class="btn btn-primary" [disabled]="loading || policyForm.invalid">
-            {{ loading ? 'Creating...' : 'Create Policy' }}
+            {{ loading ? (isEditMode ? 'Updating...' : 'Creating...') : (isEditMode ? 'Update Policy' : 'Create Policy') }}
             </button>
         </div>
       </form>
@@ -77,16 +77,19 @@ import { AdminService } from '../../../core/services/admin.service';
   `,
   styleUrls: ['./create-policy.component.scss']
 })
-export class CreatePolicyComponent {
+export class CreatePolicyComponent implements OnInit {
   policyForm: FormGroup;
   loading = false;
   error = '';
   success = false;
+  isEditMode = false;
+  policyId: number | null = null;
 
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.policyForm = this.fb.group({
       name: ['', Validators.required],
@@ -100,12 +103,50 @@ export class CreatePolicyComponent {
     });
   }
 
+  ngOnInit(): void {
+    // Check if we have a policy ID in the route
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.isEditMode = true;
+        this.policyId = +params['id'];
+        this.loadPolicyData(this.policyId);
+      }
+    });
+  }
+
+  loadPolicyData(id: number): void {
+    this.loading = true;
+    this.adminService.getPolicyById(id).subscribe({
+      next: (policy) => {
+        this.policyForm.patchValue({
+          name: policy.name,
+          description: policy.description,
+          coverageAmount: policy.coverageAmount,
+          premiumPerYear: policy.premiumPerYear,
+          minPeriodYears: policy.minPeriodYears,
+          maxPeriodYears: policy.maxPeriodYears,
+          riskLevel: policy.riskLevel,
+          termsAndConditions: policy.termsAndConditions
+        });
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load policy data';
+        this.loading = false;
+      }
+    });
+  }
+
   onSubmit(): void {
     if (this.policyForm.invalid) return;
     this.loading = true;
     this.error = '';
 
-    this.adminService.createPolicy(this.policyForm.value).subscribe({
+    const operation = this.isEditMode && this.policyId
+      ? this.adminService.updatePolicy(this.policyId, this.policyForm.value)
+      : this.adminService.createPolicy(this.policyForm.value);
+
+    operation.subscribe({
       next: () => {
         this.success = true;
         this.loading = false;

@@ -21,6 +21,7 @@ public class PolicyResponse {
     private Policy.RiskLevel riskLevel;
     private Integer minPeriodYears;
     private Integer maxPeriodYears;
+    private String termsAndConditions;
     private String policyDocumentUrl;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
+import { environment } from '../../../../environments/environment';
 
 interface Message {
   sender: 'user' | 'ai';
@@ -91,6 +92,9 @@ export class CorporateAiAssistantComponent implements OnInit, AfterViewChecked {
   }
 
   scrollToBottom(): void {
+    // Only scroll if there are messages or loading indicator
+    if (this.messages.length === 0 && !this.loading) return;
+
     try {
       this.chatEndRef.nativeElement.scrollIntoView({ behavior: 'smooth' });
     } catch (err) { }
@@ -110,8 +114,7 @@ export class CorporateAiAssistantComponent implements OnInit, AfterViewChecked {
     this.loading = true;
 
     // API Call
-    // Assuming the backend is on localhost:8080 as per React code
-    const url = 'http://localhost:8080/api/ai/admin-recommendation';
+    const url = `${environment.apiBaseUrl}/ai/admin-recommendation`;
 
     const token = this.authService.getToken();
     const headers = {

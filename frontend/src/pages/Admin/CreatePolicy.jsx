@@ -75,7 +75,7 @@ const CreatePolicy = () => {
 
                 <div className="input-row">
                     <div className="input-group">
-                        <label className="input-label">Premium Per Year (Rupees)</label>
+                        <label className="input-label">Premium Per Month (Rupees)</label>
                         <input
                             type="number"
                             name="premiumPerYear"
@@ -146,7 +146,7 @@ const CreatePolicy = () => {
                     </div>
                 </div>
 
-                <div className="input-group">
+                {/* <div className="input-group">
                     <label className="input-label">Policy Document (Optional)</label>
                     <input
                         type="file"
@@ -154,7 +154,7 @@ const CreatePolicy = () => {
                         className="input-field"
                         accept=".pdf"
                     />
-                </div>
+                </div> */}
 
                 <div className="form-actions">
                     <button type="button" onClick={() => navigate('/admin')} className="btn btn-outline">

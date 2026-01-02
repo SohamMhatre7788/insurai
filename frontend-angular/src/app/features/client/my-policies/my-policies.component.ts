@@ -5,10 +5,10 @@ import { ClientPolicyService } from '../../../core/services/client-policy.servic
 import { ClientPolicy } from '../../../core/models/policy.model';
 
 @Component({
-    selector: 'app-my-policies',
-    standalone: true,
-    imports: [CommonModule, RouterModule],
-    template: `
+  selector: 'app-my-policies',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  template: `
     <div *ngIf="loading" class="loading"><div class="spinner"></div></div>
     <div *ngIf="!loading" class="container" style="padding: 2rem;">
       <h1>My Policies</h1>
@@ -29,7 +29,7 @@ import { ClientPolicy } from '../../../core/models/policy.model';
         </thead>
         <tbody>
           <tr *ngFor="let policy of policies">
-            <td>{{ policy.policy?.name || 'N/A' }}</td>
+            <td>{{ policy.policyName || 'N/A' }}</td>
             <td>{{ policy.companyName }}</td>
             <td><span [class]="'badge badge-' + getBadgeClass(policy.status)">{{ policy.status }}</span></td>
             <td>{{ policy.startDate | date }}</td>
@@ -40,39 +40,39 @@ import { ClientPolicy } from '../../../core/models/policy.model';
       </table>
     </div>
   `,
-    styles: [`
+  styles: [`
     th { text-align: left; padding: 1rem; }
     td { padding: 0.75rem 1rem; }
   `]
 })
 export class MyPoliciesComponent implements OnInit {
-    policies: ClientPolicy[] = [];
-    loading = true;
+  policies: ClientPolicy[] = [];
+  loading = true;
 
-    constructor(private clientPolicyService: ClientPolicyService) { }
+  constructor(private clientPolicyService: ClientPolicyService) { }
 
-    ngOnInit(): void {
-        this.clientPolicyService.getMyPolicies().subscribe({
-            next: (data) => {
-                this.policies = data;
-                this.loading = false;
-            },
-            error: () => {
-                this.loading = false;
-            }
-        });
-    }
+  ngOnInit(): void {
+    this.clientPolicyService.getMyPolicies().subscribe({
+      next: (data) => {
+        this.policies = data;
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+      }
+    });
+  }
 
-    getBadgeClass(status: string): string {
-        return status === 'ACTIVE' ? 'success' : status === 'EXPIRED' ? 'danger' : 'warning';
-    }
+  getBadgeClass(status: string): string {
+    return status === 'ACTIVE' ? 'success' : status === 'EXPIRED' ? 'danger' : 'warning';
+  }
 
-    renewPolicy(id: number): void {
-        this.clientPolicyService.renewPolicy(id).subscribe({
-            next: () => {
-                alert('Policy renewed successfully!');
-                this.ngOnInit();
-            }
-        });
-    }
+  renewPolicy(id: number): void {
+    this.clientPolicyService.renewPolicy(id).subscribe({
+      next: () => {
+        alert('Policy renewed successfully!');
+        this.ngOnInit();
+      }
+    });
+  }
 }

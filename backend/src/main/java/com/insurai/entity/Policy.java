@@ -45,6 +45,9 @@ public class Policy {
     @Column(nullable = false)
     private Integer maxPeriodYears = 5;
 
+    @Column(columnDefinition = "TEXT")
+    private String termsAndConditions;
+
     @Column(length = 500)
     private String policyDocumentUrl;
 

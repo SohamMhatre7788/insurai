@@ -56,7 +56,7 @@ const ManagePolicies = () => {
                     <thead>
                         <tr>
                             <th>Policy Name</th>
-                            <th>Premium/Year</th>
+                            <th>Premium/Month</th>
                             <th>Coverage</th>
                             <th>Risk Level</th>
                             <th>Period Range</th>

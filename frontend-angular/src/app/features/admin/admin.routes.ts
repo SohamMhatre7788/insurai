@@ -11,6 +11,10 @@ export const ADMIN_ROUTES: Routes = [
         loadComponent: () => import('./create-policy/create-policy.component').then(m => m.CreatePolicyComponent)
     },
     {
+        path: 'create-policy/:id',
+        loadComponent: () => import('./create-policy/create-policy.component').then(m => m.CreatePolicyComponent)
+    },
+    {
         path: 'policies',
         loadComponent: () => import('./manage-policies/manage-policies.component').then(m => m.ManagePoliciesComponent)
     },

@@ -73,6 +73,21 @@
                     [min]="selectedPolicy.minPeriodYears || 1" [max]="selectedPolicy.maxPeriodYears || 10" />
             </div>
 
+            <div class="terms-section">
+                <div class="terms-checkbox-container">
+                    <input type="checkbox" formControlName="acceptedTerms" id="acceptedTerms" class="terms-checkbox" />
+                    <label for="acceptedTerms" class="terms-label">
+                        I accept the 
+                        <a (click)="openTermsModal(); $event.preventDefault()" class="terms-link">
+                            Terms and Conditions
+                        </a>
+                    </label>
+                </div>
+                <div *ngIf="purchaseForm.get('acceptedTerms')?.touched && purchaseForm.get('acceptedTerms')?.invalid" class="terms-error">
+                    You must accept the terms and conditions to proceed
+                </div>
+            </div>
+
             <div class="premium-summary">
                 <h4>Total Premium(Per Month): {{ calculatePremium() | number }} Rupees</h4>
             </div>
@@ -86,5 +101,26 @@
                 </button>
             </div>
         </form>
+
+        <!-- Terms and Conditions Modal -->
+        <div *ngIf="showTermsModal" class="modal-overlay" (click)="closeTermsModal()">
+            <div class="modal-content" (click)="$event.stopPropagation()">
+                <div class="modal-header">
+                    <h3>Terms and Conditions</h3>
+                    <button class="modal-close" (click)="closeTermsModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p *ngIf="!selectedPolicy.termsAndConditions" class="no-terms">
+                        No terms and conditions available for this policy.
+                    </p>
+                    <div *ngIf="selectedPolicy.termsAndConditions" class="terms-content">
+                        {{ selectedPolicy.termsAndConditions }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" (click)="closeTermsModal()">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

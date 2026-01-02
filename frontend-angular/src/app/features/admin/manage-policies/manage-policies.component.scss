@@ -162,6 +162,12 @@
     font-weight: 500;
 }
 
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
 .fade-in {
     animation: fadeIn 0.4s ease-out;
 }

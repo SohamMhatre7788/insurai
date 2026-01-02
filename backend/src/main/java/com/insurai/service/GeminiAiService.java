@@ -26,8 +26,7 @@ public class GeminiAiService {
     @Autowired
     private AiDataService aiDataService; // fetches data from DB
 
-    private final String GEMINI_URL =
-            "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash-lite:generateContent?key=";
+    private final String GEMINI_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash-lite:generateContent?key=";
 
     @PostConstruct
     public void checkApiKeyLoaded() {
@@ -40,23 +39,22 @@ public class GeminiAiService {
     public String callGemini(String prompt) {
         try {
             RestTemplate restTemplate = new RestTemplate();
-SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-factory.setConnectTimeout(5000); // 5 seconds to connect
-factory.setReadTimeout(10000);   // 10 seconds to read response
-restTemplate.setRequestFactory(factory);
-
+            SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+            factory.setConnectTimeout(5000); // 5 seconds to connect
+            factory.setReadTimeout(10000); // 10 seconds to read response
+            restTemplate.setRequestFactory(factory);
 
             String requestBody = """
-            {
-              "contents": [
-                {
-                  "parts": [
-                    { "text": "%s" }
-                  ]
-                }
-              ]
-            }
-            """.formatted(prompt);
+                    {
+                      "contents": [
+                        {
+                          "parts": [
+                            { "text": "%s" }
+                          ]
+                        }
+                      ]
+                    }
+                    """.formatted(prompt);
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -68,19 +66,21 @@ restTemplate.setRequestFactory(factory);
                     GEMINI_URL + safeApiKey,
                     HttpMethod.POST,
                     entity,
-                    String.class
-            );
+                    String.class);
 
-            if (response.getBody() == null) return null;
+            if (response.getBody() == null)
+                return null;
 
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(response.getBody());
 
             JsonNode candidates = root.path("candidates");
-            if (!candidates.isArray() || candidates.isEmpty()) return null;
+            if (!candidates.isArray() || candidates.isEmpty())
+                return null;
 
             JsonNode parts = candidates.get(0).path("content").path("parts");
-            if (!parts.isArray() || parts.isEmpty()) return null;
+            if (!parts.isArray() || parts.isEmpty())
+                return null;
 
             String text = parts.get(0).path("text").asText(null);
             return (text == null || text.isBlank()) ? null : text;
@@ -94,26 +94,31 @@ restTemplate.setRequestFactory(factory);
     /**
      * Standard AI response (generic)
      */
-   public String generateText(String prompt) {
-    try {
-        System.out.println("AI PROMPT SENT:\n" + prompt);
+    public String generateText(String prompt) {
+        try {
+            System.out.println("AI PROMPT SENT:\n" + prompt);
 
-        String response = callGemini(prompt);
+            String response = callGemini(prompt);
 
-        System.out.println("AI RESPONSE:\n" + response);
+            System.out.println("AI RESPONSE:\n" + response);
 
-        if (response == null || response.isBlank()) {
-            return "No meaningful answer could be generated from the policy data.";
+            if (response == null || response.isBlank()) {
+                return "No meaningful answer could be generated from the policy data.";
+            }
+
+            // Replace any dollar signs with rupee symbols as a safety measure
+            response = response.replace("$", "₹");
+            response = response.replace("USD", "INR");
+            response = response.replace("dollars", "rupees");
+            response = response.replace("Dollars", "Rupees");
+
+            return response;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "AI service is currently unavailable. Please try again.";
         }
-
-        return response;
-
-    } catch (Exception e) {
-        e.printStackTrace();
-        return "AI service is currently unavailable. Please try again.";
     }
-}
-
 
     /**
      * Generate client-specific response including their policies
@@ -154,18 +159,18 @@ restTemplate.setRequestFactory(factory);
      * Helper: convert policy list to readable text
      */
     private String buildPolicyInfoText(List<PolicySummaryDTO> policies) {
-        if (policies == null || policies.isEmpty()) return "No policy information available.";
+        if (policies == null || policies.isEmpty())
+            return "No policy information available.";
 
         return policies.stream()
                 .map(p -> String.format(
-                        "Name: %s, Risk: %s, Coverage: %.2f, Premium: %.2f, MinYears: %d, MaxYears: %d",
+                        "Name: %s, Risk: %s, Coverage: ₹%.2f, Premium: ₹%.2f, MinYears: %d, MaxYears: %d",
                         p.getName(),
                         p.getRiskLevel(),
                         p.getCoverageAmount().doubleValue(),
                         p.getPremiumPerYear().doubleValue(),
                         p.getMinPeriodYears(),
-                        p.getMaxPeriodYears()
-                ))
+                        p.getMaxPeriodYears()))
                 .collect(Collectors.joining("\n"));
     }
 }
