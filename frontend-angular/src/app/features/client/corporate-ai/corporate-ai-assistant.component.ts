@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
+import { environment } from '../../../../environments/environment';
 
 interface Message {
   sender: 'user' | 'ai';
@@ -87,10 +88,13 @@ export class CorporateAiAssistantComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void { }
 
   ngAfterViewChecked(): void {
-    this.scrollToBottom();
+    // this.scrollToBottom();
   }
 
   scrollToBottom(): void {
+    // Only scroll if there are messages or loading indicator
+    if (this.messages.length === 0 && !this.loading) return;
+
     try {
       this.chatEndRef.nativeElement.scrollIntoView({ behavior: 'smooth' });
     } catch (err) { }
@@ -110,13 +114,7 @@ export class CorporateAiAssistantComponent implements OnInit, AfterViewChecked {
     this.loading = true;
 
     // API Call
-    // Assuming the backend is on localhost:8080 as per React code
-    const url = 'http://localhost:8080/api/ai/client-recommendation';
-    // Angular HttpClient automatically adds the Bearer token if we have an interceptor,
-    // but the React code manually adds it.
-    // The AuthService in this codebase stores token in local storage.
-    // I should check if there is an interceptor. If not, I should add headers.
-    // For now I will manually add headers to match React implementation safety.
+    const url = `${environment.apiBaseUrl}/ai/client-recommendation`;
 
     const token = this.authService.getToken();
     const headers = {

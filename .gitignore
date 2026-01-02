@@ -17,3 +17,5 @@ frontend/node_modules/.vite/
 .env
 backend/target/
 frontend/node_modules/
+
+application.properties

@@ -12,18 +12,7 @@ export class ClaimService {
 
     constructor(private http: HttpClient) { }
 
-    createClaim(data: CreateClaimRequest): Observable<Claim> {
-        const formData = new FormData();
-        formData.append('clientPolicyId', data.clientPolicyId.toString());
-        formData.append('claimAmountRequested', data.claimAmountRequested.toString());
-        formData.append('description', data.description);
-
-        if (data.documents && data.documents.length > 0) {
-            data.documents.forEach((doc) => {
-                formData.append('documents', doc);
-            });
-        }
-
+    createClaim(formData: FormData): Observable<Claim> {
         return this.http.post<Claim>(this.apiUrl, formData);
     }
 

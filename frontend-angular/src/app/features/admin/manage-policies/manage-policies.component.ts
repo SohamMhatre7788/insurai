@@ -46,20 +46,12 @@ import { Policy } from '../../../core/models/policy.model';
                       <td>{{ policy.minPeriodYears }}-{{ policy.maxPeriodYears }} years</td>
                       <td>
                           <div class="actions">
-                              <!-- Angular typically handles documents via a separate service or simple link if URL is public -->
-                              <!-- Assuming policy has documentUrl field which might differ from React's property name, 
-                                   but looking at React code it is policyDocumentUrl. 
-                                   Checking Policy model definition might be needed, but sticking to React property first. -->
-                               
-                              <!-- Note: In React code it was policyDocumentUrl. In Policy model, it might be different. 
-                                   Let's check usage. The model file was unseen but I will assume standard match or check error. -->
-                              
-                              <!-- For now, assuming standard buttons -->
-                               <!-- If policy has a document url, show view doc -->
-                               <!-- Since I don't see the specific property in the previous 'Policy' interface view, 
-                                    I will be safe and just put Delete first, and View Doc if I can find the prop.
-                                    React used 'policyDocumentUrl'. -->
-                              
+                              <button
+                                  class="btn btn-sm btn-primary"
+                                  [routerLink]="['/admin/create-policy', policy.id]"
+                              >
+                                  Edit
+                              </button>
                               <button
                                   class="btn btn-sm btn-danger"
                                   (click)="deletePolicy(policy.id)"

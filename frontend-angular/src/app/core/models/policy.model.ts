@@ -15,6 +15,7 @@ export interface Policy {
 export interface ClientPolicy {
     id: number;
     policyId: number;
+    policyName: string;
     companyName: string;
     numberOfEmployees: number;
     policyPeriodYears: number;

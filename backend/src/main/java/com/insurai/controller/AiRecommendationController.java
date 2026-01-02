@@ -18,12 +18,13 @@ public class AiRecommendationController {
     private final AiDataService aiDataService;
 
     public AiRecommendationController(GeminiAiService geminiAiService,
-                                      AiDataService aiDataService) {
+            AiDataService aiDataService) {
         this.geminiAiService = geminiAiService;
         this.aiDataService = aiDataService;
     }
-// ---------------- CLIENT AI ----------------
- @PostMapping("/client-recommendation")
+
+    // ---------------- CLIENT AI ----------------
+    @PostMapping("/client-recommendation")
     public Map<String, String> getClientRecommendation(
             @RequestBody Map<String, String> request,
             Authentication authentication) {
@@ -43,6 +44,8 @@ public class AiRecommendationController {
         // Build prompt for AI
         StringBuilder prompt = new StringBuilder();
         prompt.append("You are a corporate insurance expert. Answer clearly.\n");
+        prompt.append("IMPORTANT: All currency amounts are in Indian Rupees (INR). \n");
+        prompt.append("NEVER use dollar signs ($). ALWAYS use Rupees or INR or ₹.\n");
 
         if (clientPolicies.isEmpty()) {
             prompt.append("Client has no active policies.\n");
@@ -50,14 +53,14 @@ public class AiRecommendationController {
             prompt.append("Client policies:\n");
             for (PolicySummaryDTO p : clientPolicies) {
                 prompt.append("- ")
-                      .append(p.getName())
-                      .append(", Coverage: ").append(p.getCoverageAmount())
-                      .append(", Premium: ").append(p.getPremiumPerYear())
-                      .append(", Risk: ").append(p.getRiskLevel())
-                      .append(", Period: ")
-                      .append(p.getMinPeriodYears()).append("-")
-                      .append(p.getMaxPeriodYears())
-                      .append(" years\n");
+                        .append(p.getName())
+                        .append(", Coverage: ₹").append(p.getCoverageAmount()).append(" INR")
+                        .append(", Premium: ₹").append(p.getPremiumPerYear()).append(" INR")
+                        .append(", Risk: ").append(p.getRiskLevel())
+                        .append(", Period: ")
+                        .append(p.getMinPeriodYears()).append("-")
+                        .append(p.getMaxPeriodYears())
+                        .append(" years\n");
             }
         }
 
@@ -67,35 +70,36 @@ public class AiRecommendationController {
         String reply = geminiAiService.generateText(prompt.toString());
 
         return Map.of(
-            "response",
-            reply == null || reply.isBlank()
-                    ? "AI did not return a response. Please try again."
-                    : reply
-        );
+                "response",
+                reply == null || reply.isBlank()
+                        ? "AI did not return a response. Please try again."
+                        : reply);
     }
+
     // ---------------- ADMIN AI ----------------
     @PostMapping("/admin-recommendation")
     public Map<String, String> getAdminRecommendation(
             @RequestBody Map<String, String> request) {
 
         String question = request.get("input");
-        List<PolicySummaryDTO> allPolicies =
-                aiDataService.getAllAdminPolicies();
+        List<PolicySummaryDTO> allPolicies = aiDataService.getAllAdminPolicies();
 
         StringBuilder prompt = new StringBuilder();
         prompt.append("You are helping an insurance admin.\n");
+        prompt.append("IMPORTANT: All currency amounts are in Indian Rupees (INR). \n");
+        prompt.append("NEVER use dollar signs ($). ALWAYS use Rupees or INR or ₹.\n");
         prompt.append("System policies:\n");
 
         for (PolicySummaryDTO p : allPolicies) {
             prompt.append("- ")
-                  .append(p.getName())
-                  .append(", Coverage: ").append(p.getCoverageAmount())
-                  .append(", Premium: ").append(p.getPremiumPerYear())
-                  .append(", Risk: ").append(p.getRiskLevel())
-                  .append(", Period: ")
-                  .append(p.getMinPeriodYears()).append("-")
-                  .append(p.getMaxPeriodYears())
-                  .append(" years\n");
+                    .append(p.getName())
+                    .append(", Coverage: ₹").append(p.getCoverageAmount()).append(" INR")
+                    .append(", Premium: ₹").append(p.getPremiumPerYear()).append(" INR")
+                    .append(", Risk: ").append(p.getRiskLevel())
+                    .append(", Period: ")
+                    .append(p.getMinPeriodYears()).append("-")
+                    .append(p.getMaxPeriodYears())
+                    .append(" years\n");
         }
 
         prompt.append("Question: ").append(question);
@@ -113,9 +117,8 @@ public class AiRecommendationController {
 
         if (isGreeting(question)) {
             return Map.of(
-                "response",
-                "Hello! How can I help you with corporate insurance today?"
-            );
+                    "response",
+                    "Hello! How can I help you with corporate insurance today?");
         }
 
         String reply = geminiAiService.generateText(question);
@@ -123,10 +126,11 @@ public class AiRecommendationController {
     }
 
     private boolean isGreeting(String input) {
-        if (input == null) return false;
+        if (input == null)
+            return false;
         String lowered = input.toLowerCase();
         return lowered.contains("hello")
-            || lowered.contains("hi")
-            || lowered.contains("greetings");
+                || lowered.contains("hi")
+                || lowered.contains("greetings");
     }
 }

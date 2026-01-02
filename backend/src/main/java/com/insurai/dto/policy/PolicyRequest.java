@@ -36,4 +36,6 @@ public class PolicyRequest {
     @NotNull(message = "Maximum period years is required")
     @Min(value = 1, message = "Maximum period must be at least 1 year")
     private Integer maxPeriodYears;
+
+    private String termsAndConditions;
 }

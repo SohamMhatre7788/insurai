@@ -43,6 +43,7 @@ public class PolicyService {
         policy.setRiskLevel(request.getRiskLevel());
         policy.setMinPeriodYears(request.getMinPeriodYears());
         policy.setMaxPeriodYears(request.getMaxPeriodYears());
+        policy.setTermsAndConditions(request.getTermsAndConditions());
 
         if (document != null && !document.isEmpty()) {
             String documentUrl = cloudinaryService.uploadFile(document, "policies");
@@ -65,6 +66,7 @@ public class PolicyService {
         policy.setRiskLevel(request.getRiskLevel());
         policy.setMinPeriodYears(request.getMinPeriodYears());
         policy.setMaxPeriodYears(request.getMaxPeriodYears());
+        policy.setTermsAndConditions(request.getTermsAndConditions());
 
         if (document != null && !document.isEmpty()) {
             String documentUrl = cloudinaryService.uploadFile(document, "policies");
@@ -92,6 +94,7 @@ public class PolicyService {
                 policy.getRiskLevel(),
                 policy.getMinPeriodYears(),
                 policy.getMaxPeriodYears(),
+                policy.getTermsAndConditions(),
                 policy.getPolicyDocumentUrl(),
                 policy.getCreatedAt(),
                 policy.getUpdatedAt());

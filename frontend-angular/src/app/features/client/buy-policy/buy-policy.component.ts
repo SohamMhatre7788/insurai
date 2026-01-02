@@ -21,6 +21,7 @@ export class BuyPolicyComponent implements OnInit {
     purchasing = false;
     error = '';
     success = false;
+    showTermsModal = false;
 
     constructor(
         private fb: FormBuilder,
@@ -32,7 +33,8 @@ export class BuyPolicyComponent implements OnInit {
             policyId: ['', Validators.required],
             companyName: ['', Validators.required],
             numberOfEmployees: ['', [Validators.required, Validators.min(1)]],
-            policyPeriodYears: ['', Validators.required]
+            policyPeriodYears: ['', Validators.required],
+            acceptedTerms: [false, Validators.requiredTrue]
         });
     }
 
@@ -94,5 +96,13 @@ export class BuyPolicyComponent implements OnInit {
 
     backToPolicies(): void {
         this.selectedPolicy = null;
+    }
+
+    openTermsModal(): void {
+        this.showTermsModal = true;
+    }
+
+    closeTermsModal(): void {
+        this.showTermsModal = false;
     }
 }

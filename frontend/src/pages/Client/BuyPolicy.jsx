@@ -172,7 +172,9 @@ const BuyPolicy = () => {
                         <div>
                             <label className="input-label">Terms & condition:<br/></label>
                             <div>{policies.map((policy) => (
-                                <p className="policy-description">{policy.description}</p>
+                                <div key={policy.id}>
+                                    <p className="policy-description">{policy.description}</p>
+                                </div>
                             ))}
                             </div>
                         </div>
