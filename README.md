@@ -29,7 +29,7 @@ Backend will start on `http://localhost:8080`
 
 1. Navigate to frontend directory:
 ```bash
-cd frontend
+cd frontend-angular 
 ```
 
 2. Install dependencies:
@@ -37,14 +37,9 @@ cd frontend
 npm install
 ```
 
-3. Create `.env` file:
-```env
-VITE_API_BASE_URL=http://localhost:8080/api
-```
-
-4. Run the frontend:
+4. Run the frontend-angular:
 ```bash
-npm run dev
+npm start
 ```
 
 Frontend will start on `http://localhost:5173`
@@ -77,12 +72,15 @@ Frontend will start on `http://localhost:5173`
 - Cloudinary (File Storage)
 - Maven
 
-### Frontend
-- React 18
-- React Router DOM 6
-- Axios
-- Vite
-- Modern CSS
+### Framework: Angular 21.0.0
+- Language: TypeScript 5.9.2
+-Styling: SCSS with custom design system
+- HTTP Client: Angular Common HTTP
+- Routing: Angular Router
+- Forms: Angular Reactive Forms
+- State Management: RxJS 7.8.0
+- Build Tool: Angular CLI 21.0.4
+- Testing: Vitest 4.0.8
 
 ## 📂 Project Structure
 
@@ -100,14 +98,31 @@ insurai/
 │   │       └── service/
 │   └── pom.xml
 │
-└── frontend/            # React application
-    ├── src/
-    │   ├── components/
-    │   ├── context/
-    │   ├── pages/
-    │   ├── services/
-    │   └── styles/
-    └── package.json
+└── frontend-angular/
+├── src/
+│   ├── app/
+│   │   ├── core/               # Core functionality
+│   │   │   ├── guards/         # Route guards (auth, admin)
+│   │   │   ├── interceptors/   # HTTP interceptors (auth)
+│   │   │   ├── models/         # TypeScript interfaces and models
+│   │   │   └── services/       # API and business logic services
+│   │   ├── features/           # Feature modules
+│   │   │   ├── auth/           # Authentication (login, signup, forgot password)
+│   │   │   ├── client/         # Client portal features
+│   │   │   └── admin/          # Admin panel features
+│   │   ├── shared/             # Shared components
+│   │   │   ├── navbar/         # Navigation bar
+│   │   │   ├── footer/         # Footer component
+│   │   │   └── theme-toggle/   # Dark/light theme toggle
+│   │   ├── app.routes.ts       # Application routing configuration
+│   │   ├── app.config.ts       # Application configuration
+│   │   └── app.component.ts    # Root component
+│   ├── styles/                 # Global styles
+│   └── index.html              # Main HTML file
+├── public/                     # Static assets
+├── angular.json                # Angular CLI configuration
+├── tsconfig.json               # TypeScript configuration
+└── package.json                # Project dependencies
 ```
 
 ## 🔑 Default Admin Credentials
@@ -209,4 +224,4 @@ For issues and questions, please create an issue in the repository.
 
 ---
 
-Built with ❤️ using Spring Boot and React
+Built with ❤️ using Spring Boot and Angular 
