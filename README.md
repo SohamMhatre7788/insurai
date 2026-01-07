@@ -42,7 +42,7 @@ npm install
 npm start
 ```
 
-Frontend will start on `http://localhost:5173`
+Frontend will start on `http://localhost:4200`
 
 ## 📋 Features
 
