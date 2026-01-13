@@ -40,6 +40,7 @@ public class SecurityConfig {
                         .requestMatchers("/policies").permitAll()
                         .requestMatchers("/policies/{id}").permitAll()
                         .requestMatchers("/client/**").hasRole("CLIENT")
+                        .requestMatchers("/client-policies/admin/**").hasRole("ADMIN")
                         .requestMatchers("/client-policies/**").hasRole("CLIENT")
                         .requestMatchers("/claims/**").hasAnyRole("CLIENT", "ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
@@ -54,7 +55,8 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:3000","http://localhost:4200"));
+        configuration
+                .setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:3000", "http://localhost:4200"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);

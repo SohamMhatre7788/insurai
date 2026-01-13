@@ -73,10 +73,12 @@ export class CorporateAiAssistantComponent implements OnInit, AfterViewChecked {
   messages: Message[] = [];
   input: string = '';
   suggested: string[] = [
+    "What is corporate insurance?",
     "Which policies do I currently have?",
-    "What is my coverage amount?",
-    "When does my policy expire?",
-    "How can I file a claim?"
+    "How does the claim process work?",
+    "What factors affect my premium amount?",
+    "What is my total coverage amount?",
+    "Explain the difference between term and whole life insurance"
   ];
   loading: boolean = false;
 

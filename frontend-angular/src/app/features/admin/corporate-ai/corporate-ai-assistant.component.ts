@@ -73,10 +73,12 @@ export class CorporateAiAssistantComponent implements OnInit, AfterViewChecked {
   messages: Message[] = [];
   input: string = '';
   suggested: string[] = [
-    "List all system policies",
+    "List all system policies and their risk levels",
+    "What are best practices for policy pricing?",
+    "How to handle high-value claims?",
     "Show premium vs coverage comparison",
-    "Which policies have high risk?",
-    "Create a new corporate policy"
+    "What are current corporate insurance trends?",
+    "How to assess policy risk levels?"
   ];
   loading: boolean = false;
 

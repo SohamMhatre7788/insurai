@@ -67,6 +67,12 @@ import { AdminService } from '../../../core/services/admin.service';
             <h3>Manage Clients</h3>
             <p>View and manage client accounts</p>
           </a>
+
+          <a routerLink="/admin/client-policies" class="action-card card card-hover">
+            <div class="action-icon">🛡️</div>
+            <h3>Client Policies</h3>
+            <p>View and manage client purchases</p>
+          </a>
         </div>
       </div>
 

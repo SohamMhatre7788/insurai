@@ -27,6 +27,10 @@ export const ADMIN_ROUTES: Routes = [
         loadComponent: () => import('./manage-clients/manage-clients.component').then(m => m.ManageClientsComponent)
     },
     {
+        path: 'client-policies',
+        loadComponent: () => import('./manage-client-policies/manage-client-policies.component').then(m => m.ManageClientPoliciesComponent)
+    },
+    {
         path: 'corporate-ai',
         loadComponent: () => import('./corporate-ai/corporate-ai-assistant.component').then(m => m.CorporateAiAssistantComponent)
     }

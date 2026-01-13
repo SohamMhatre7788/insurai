@@ -1,6 +1,6 @@
 <nav class="navbar">
   <div class="navbar-container">
-    <a routerLink="/" class="navbar-logo">
+    <a class="navbar-logo">
       <span class="logo-icon">🛡️</span>
       <span class="logo-text">Insurai</span>
     </a>
@@ -29,6 +29,7 @@
         <a routerLink="/admin/policies" class="nav-link">Manage Policies</a>
         <a routerLink="/admin/claims" class="nav-link">Manage Claims</a>
         <a routerLink="/admin/clients" class="nav-link">Manage Clients</a>
+        <a routerLink="/admin/client-policies" class="nav-link">Client Policies</a>
         <div class="nav-user">
           <span class="admin-badge">ADMIN</span>
           <span class="user-name">{{ (user$ | async)?.firstName }}</span>
