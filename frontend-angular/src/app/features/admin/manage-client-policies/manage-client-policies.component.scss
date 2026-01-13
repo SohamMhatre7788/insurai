@@ -1,0 +1,341 @@
+@use "sass:color";
+
+.manage-client-policies {
+  padding: 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  color: var(--text-primary);
+}
+
+.header {
+  margin-bottom: 2rem;
+
+  h2 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+  }
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--border-color);
+    border-top: 4px solid var(--primary-500);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+  }
+
+  p {
+    color: var(--text-muted);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.error-message {
+  background-color: rgba(239, 83, 80, 0.1);
+  border: 1px solid #ef5350;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+
+  p {
+    color: #ef5350;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  button {
+    background-color: #e53935;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+
+    &:hover {
+      background-color: #c62828;
+    }
+  }
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .search-box {
+    flex: 1;
+    min-width: 300px;
+
+    .search-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: 8px;
+      font-size: 0.95rem;
+
+      &::placeholder {
+        color: var(--text-muted);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--primary-500);
+        box-shadow: 0 0 0 2px rgba(79, 172, 254, 0.2);
+      }
+    }
+  }
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    label {
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .status-select {
+      padding: 0.75rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      cursor: pointer;
+
+      option {
+        background: var(--bg-card);
+        color: var(--text-primary);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--primary-500);
+      }
+    }
+  }
+
+  .count-badge {
+    background: var(--badge-info-bg);
+    color: var(--badge-info-text);
+    padding: 0.75rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+}
+
+.table-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+
+.policies-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    background-color: var(--table-header-bg);
+
+    th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: var(--table-row-hover);
+      }
+
+      td {
+        padding: 1rem;
+        vertical-align: middle;
+        color: var(--text-primary);
+      }
+    }
+  }
+
+  .client-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    strong {
+      color: var(--text-primary);
+    }
+
+    small {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+  }
+
+  .amount {
+    font-weight: 500;
+    color: var(--primary-600);
+  }
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &.status-active {
+    background-color: rgba(46, 125, 50, 0.1);
+    color: #2e7d32;
+    border: 1px solid rgba(46, 125, 50, 0.2);
+  }
+
+  &.status-expired {
+    background-color: rgba(239, 108, 0, 0.1);
+    color: #ef6c00;
+    border: 1px solid rgba(239, 108, 0, 0.2);
+  }
+
+  &.status-cancelled {
+    background-color: rgba(198, 40, 40, 0.1);
+    color: #c62828;
+    border: 1px solid rgba(198, 40, 40, 0.2);
+  }
+}
+
+// Dark mode overrides for status badges to match readability
+:host-context(html.dark-mode) {
+  .status-badge {
+    &.status-active {
+      background-color: rgba(46, 125, 50, 0.2);
+      color: #81c784;
+    }
+
+    &.status-expired {
+      background-color: rgba(239, 108, 0, 0.2);
+      color: #ffb74d;
+    }
+
+    &.status-cancelled {
+      background-color: rgba(198, 40, 40, 0.2);
+      color: #e57373;
+    }
+  }
+
+  .amount {
+    color: #60a5fa; // Lighter blue for dark mode
+  }
+}
+
+.action-select {
+  padding: 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: var(--text-primary);
+
+  option {
+    background: var(--bg-card);
+    color: var(--text-primary);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-500);
+  }
+
+  &:hover {
+    border-color: var(--text-secondary);
+  }
+}
+
+.no-results,
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+
+  p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .table-container {
+    overflow-x: scroll;
+  }
+
+  .policies-table {
+    min-width: 1200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .manage-client-policies {
+    padding: 1rem;
+  }
+
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+
+    .search-box {
+      min-width: 100%;
+    }
+
+    .filter-group {
+      flex-direction: column;
+      align-items: stretch;
+
+      .status-select {
+        width: 100%;
+      }
+    }
+  }
+}

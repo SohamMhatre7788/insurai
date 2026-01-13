@@ -58,4 +58,24 @@ public class ClientPolicyController {
         Long userId = getCurrentUserId(authentication);
         return ResponseEntity.ok(clientPolicyService.renewPolicy(userId, id));
     }
+
+    // =============== ADMIN ENDPOINTS ===============
+
+    @GetMapping("/admin/all")
+    public ResponseEntity<List<com.insurai.dto.clientpolicy.AdminClientPolicyResponse>> getAllClientPolicies() {
+        return ResponseEntity.ok(clientPolicyService.getAllClientPolicies());
+    }
+
+    @GetMapping("/admin/client/{clientId}")
+    public ResponseEntity<List<com.insurai.dto.clientpolicy.AdminClientPolicyResponse>> getClientPoliciesByClientId(
+            @PathVariable Long clientId) {
+        return ResponseEntity.ok(clientPolicyService.getClientPoliciesByClientId(clientId));
+    }
+
+    @PutMapping("/admin/{id}/status")
+    public ResponseEntity<com.insurai.dto.clientpolicy.AdminClientPolicyResponse> updatePolicyStatus(
+            @PathVariable Long id,
+            @Valid @RequestBody com.insurai.dto.clientpolicy.UpdatePolicyStatusRequest request) {
+        return ResponseEntity.ok(clientPolicyService.updatePolicyStatus(id, request.getStatus()));
+    }
 }

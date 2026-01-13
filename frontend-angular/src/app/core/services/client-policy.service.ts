@@ -33,4 +33,18 @@ export class ClientPolicyService {
     renewPolicy(id: number): Observable<ClientPolicy> {
         return this.http.post<ClientPolicy>(`${this.apiUrl}/${id}/renew`, {});
     }
+
+    // =============== ADMIN METHODS ===============
+
+    getAllClientPolicies(): Observable<any[]> {
+        return this.http.get<any[]>(`${this.apiUrl}/admin/all`);
+    }
+
+    getClientPoliciesByClientId(clientId: number): Observable<any[]> {
+        return this.http.get<any[]>(`${this.apiUrl}/admin/client/${clientId}`);
+    }
+
+    updatePolicyStatus(policyId: number, status: string): Observable<any> {
+        return this.http.put<any>(`${this.apiUrl}/admin/${policyId}/status`, { status });
+    }
 }

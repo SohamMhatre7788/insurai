@@ -113,9 +113,63 @@ public class ClientPolicyService {
         return mapToResponse(clientPolicy);
     }
 
+    // =============== ADMIN METHODS ===============
+
+    /**
+     * Get all client policies (Admin only)
+     */
+    public List<com.insurai.dto.clientpolicy.AdminClientPolicyResponse> getAllClientPolicies() {
+        return clientPolicyRepository.findAll().stream()
+                .map(this::mapToAdminResponse)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Get client policies by client ID (Admin only)
+     */
+    public List<com.insurai.dto.clientpolicy.AdminClientPolicyResponse> getClientPoliciesByClientId(Long clientId) {
+        return clientPolicyRepository.findByClientId(clientId).stream()
+                .map(this::mapToAdminResponse)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Update policy status (Admin only)
+     */
+    @Transactional
+    public com.insurai.dto.clientpolicy.AdminClientPolicyResponse updatePolicyStatus(Long policyId,
+            ClientPolicy.PolicyStatus status) {
+        ClientPolicy clientPolicy = clientPolicyRepository.findById(policyId)
+                .orElseThrow(() -> new ResourceNotFoundException("Client policy not found"));
+
+        clientPolicy.setStatus(status);
+        clientPolicy = clientPolicyRepository.save(clientPolicy);
+
+        return mapToAdminResponse(clientPolicy);
+    }
+
     private ClientPolicyResponse mapToResponse(ClientPolicy clientPolicy) {
         return new ClientPolicyResponse(
                 clientPolicy.getId(),
+                clientPolicy.getPolicy().getId(),
+                clientPolicy.getPolicy().getName(),
+                clientPolicy.getCompanyName(),
+                clientPolicy.getNumberOfEmployees(),
+                clientPolicy.getPolicyPeriodYears(),
+                clientPolicy.getPremiumAmount(),
+                clientPolicy.getPolicy().getCoverageAmount(),
+                clientPolicy.getStartDate(),
+                clientPolicy.getEndDate(),
+                clientPolicy.getStatus());
+    }
+
+    private com.insurai.dto.clientpolicy.AdminClientPolicyResponse mapToAdminResponse(ClientPolicy clientPolicy) {
+        String clientName = clientPolicy.getClient().getFirstName() + " " + clientPolicy.getClient().getLastName();
+        return new com.insurai.dto.clientpolicy.AdminClientPolicyResponse(
+                clientPolicy.getId(),
+                clientPolicy.getClient().getId(),
+                clientName,
+                clientPolicy.getClient().getEmail(),
                 clientPolicy.getPolicy().getId(),
                 clientPolicy.getPolicy().getName(),
                 clientPolicy.getCompanyName(),

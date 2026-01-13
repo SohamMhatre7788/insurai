@@ -1,0 +1,110 @@
+<div class="manage-client-policies">
+  <div class="header">
+    <h2>Manage Client Policies</h2>
+    <p class="subtitle">View and manage all insurance policies purchased by clients</p>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading client policies...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-message">
+    <p>{{ error }}</p>
+    <button (click)="loadAllClientPolicies()">Retry</button>
+  </div>
+
+  <!-- Filters -->
+  <div *ngIf="!loading && !error" class="filters">
+    <div class="search-box">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="onSearchChange()"
+        placeholder="Search by client name, email, policy, or company..."
+        class="search-input"
+      />
+    </div>
+
+    <div class="filter-group">
+      <label>Status:</label>
+      <select [(ngModel)]="statusFilter" (change)="onStatusFilterChange()" class="status-select">
+        <option value="ALL">All Statuses</option>
+        <option value="ACTIVE">Active</option>
+        <option value="EXPIRED">Expired</option>
+        <option value="CANCELLED">Cancelled</option>
+      </select>
+    </div>
+
+    <div class="count-badge">
+      Showing {{ filteredPolicies.length }} of {{ clientPolicies.length }} policies
+    </div>
+  </div>
+
+  <!-- Policies Table -->
+  <div *ngIf="!loading && !error && filteredPolicies.length > 0" class="table-container">
+    <table class="policies-table">
+      <thead>
+        <tr>
+          <th>Client</th>
+          <th>Policy Name</th>
+          <th>Company</th>
+          <th>Employees</th>
+          <th>Coverage</th>
+          <th>Premium</th>
+          <th>Period</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let policy of filteredPolicies">
+          <td>
+            <div class="client-info">
+              <strong>{{ policy.clientName }}</strong>
+              <small>{{ policy.clientEmail }}</small>
+            </div>
+          </td>
+          <td>{{ policy.policyName }}</td>
+          <td>{{ policy.companyName }}</td>
+          <td>{{ policy.numberOfEmployees }}</td>
+          <td class="amount">{{ formatCurrency(policy.coverageAmount) }}</td>
+          <td class="amount">{{ formatCurrency(policy.premiumAmount) }}</td>
+          <td>{{ policy.policyPeriodYears }} years</td>
+          <td>{{ formatDate(policy.startDate) }}</td>
+          <td>{{ formatDate(policy.endDate) }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="getStatusClass(policy.status)">
+              {{ policy.status }}
+            </span>
+          </td>
+          <td>
+            <select 
+              class="action-select"
+              (change)="updatePolicyStatus(policy, $any($event.target).value); $any($event.target).value = policy.status"
+            >
+              <option [value]="policy.status" selected>Change Status</option>
+              <option value="ACTIVE" [disabled]="policy.status === 'ACTIVE'">Set Active</option>
+              <option value="EXPIRED" [disabled]="policy.status === 'EXPIRED'">Set Expired</option>
+              <option value="CANCELLED" [disabled]="policy.status === 'CANCELLED'">Set Cancelled</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- No Results -->
+  <div *ngIf="!loading && !error && filteredPolicies.length === 0 && clientPolicies.length > 0" class="no-results">
+    <p>No policies match your search criteria.</p>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && !error && clientPolicies.length === 0" class="empty-state">
+    <p>No client policies found.</p>
+  </div>
+</div>
