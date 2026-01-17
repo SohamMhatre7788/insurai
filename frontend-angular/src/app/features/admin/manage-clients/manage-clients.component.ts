@@ -11,12 +11,12 @@ import { UserProfile } from '../../../core/models/user.model';
     <div class="container" style="padding: 2rem;">
       <h1>Manage Clients</h1>
       <table *ngIf="clients.length > 0" class="policies-table" style="width: 100%; margin-top: 2rem;">
-        <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Actions</th></tr></thead>
+        <thead><tr><th>Name</th><th>Email</th><th>Actions</th></tr></thead>
         <tbody>
           <tr *ngFor="let client of clients">
             <td>{{ client.firstName }} {{ client.lastName }}</td>
             <td>{{ client.email }}</td>
-            <td>{{ client.phoneNumber }}</td>
+            
             <td><button class="btn btn-danger" (click)="deleteClient(client.id)">Delete</button></td>
           </tr>
         </tbody>

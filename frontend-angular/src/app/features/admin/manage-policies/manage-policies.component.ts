@@ -26,7 +26,7 @@ import { Policy } from '../../../core/models/policy.model';
               <thead>
                   <tr>
                       <th>Policy Name</th>
-                      <th>Premium/Year</th>
+                      <th>Premium</th>
                       <th>Coverage</th>
                       <th>Risk Level</th>
                       <th>Period Range</th>
@@ -36,7 +36,7 @@ import { Policy } from '../../../core/models/policy.model';
               <tbody>
                   <tr *ngFor="let policy of policies">
                       <td>{{ policy.name }}</td>
-                      <td>{{ policy.premiumAmount | number }} Rupees</td>
+                      <td>{{ policy.premiumPerYear | number }} Rupees</td>
                       <td>{{ policy.coverageAmount | number }} Rupees</td>
                       <td>
                           <span [class]="'badge badge-' + (policy.riskLevel?.toLowerCase() || 'medium')">
